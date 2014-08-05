@@ -4,12 +4,25 @@ body{
 }
 
 main{
-	width: 80%;
+	width: 70%;
 	height: 615px;
 	background: url('../imagenes/Background.png');
 	display: inline-block;
 	text-align: left;
-	padding: 15px;
+	padding: 10px;
+        border-radius: 20px;
+}
 
+header{
+    width: 100%;
+    height: 30%;
+}
+
+section{
+    vertical-align: top;
+    width: 49%;
+    height: 20%;
+    display: inline-block;
+    text-align: center;
 }
 
