@@ -1,0 +1,15 @@
+/*CUERPO*/
+body{
+	text-align: center;
+}
+
+main{
+	width: 80%;
+	height: 615px;
+	background: url('../imagenes/Background.png');
+	display: inline-block;
+	text-align: left;
+	padding: 10px;
+
+}
+
