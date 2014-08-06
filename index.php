@@ -9,7 +9,7 @@ if (isset($_POST["iniciar"])) {
     $resultado = mysql_query($consulta);
     $num = mysql_num_rows($resultado);
     if ($num == 1) {
-        header("panel.php");
+        echo "<script>window.location.href='panel.php'</script>";
     }
     else{
         echo '<script>alert("No existe el usuario");</script>';
@@ -28,17 +28,17 @@ if (isset($_POST["iniciar"])) {
 <body>
 	<main>
             <header>Aquí va la imagen de cabecera</header>
-            <section id="login">
-            <a href="panel.php">Enlace a panel</a>
-            </section>
-            <section id="password">
-                <a href="panel.php"><img src="imagenes/contra.png" /></a>
-                <form method="POST">
+            <form method="POST">
+                <section id="login">
+                    <img src="imagenes/usuario2.png" />
                     <input type="text" name="email" placeholder="Email"/>
+                 </section>
+                <section id="password">
+                    <img src="imagenes/contra.png" />
                     <input type="password" name="pass" placeholder="Contraseña"/>
                     <input type="submit" name="iniciar"/>
-                ´</form>
-            </section>
+                </section>
+            </form>
 	</main>
 </body>
 </html>
