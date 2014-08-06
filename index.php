@@ -1,5 +1,21 @@
 <?php
+include('conexion.php');
 
+if (isset($_POST["iniciar"])) {
+    $email = $_POST["email"];
+    $pass = $_POST["pass"];
+    
+    $consulta = "SELECT * FROM usuarios WHERE email = '".$email."' AND pass = '".$pass."'";
+    $resultado = mysql_query($consulta);
+    $num = mysql_num_rows($resultado);
+    if ($num == 1) {
+        header("panel.php");
+    }
+    else{
+        echo '<script>alert("No existe el usuario");</script>';
+    }
+    
+}
 
 ?>
 <!DOCTYPE html>
@@ -17,8 +33,10 @@
             </section>
             <section id="password">
                 <a href="panel.php"><img src="imagenes/contra.png" /></a>
-                <form>
-                <input type="password"></input>
+                <form method="POST">
+                    <input type="text" name="email" placeholder="Email"/>
+                    <input type="password" name="pass" placeholder="Contraseña"/>
+                    <input type="submit" name="iniciar"/>
                 ´</form>
             </section>
 	</main>
