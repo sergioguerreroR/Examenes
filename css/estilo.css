@@ -11,6 +11,8 @@ main{
 	text-align: left;
 	padding: 10px;
         border-radius: 20px;
+        box-shadow: 0px 0px 2px 2px;
+
 }
 
 header{
