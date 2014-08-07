@@ -14,7 +14,10 @@ include('conexion.php');
                 $consulta = "SELECT * FROM cursos";
                 $resultado = mysql_query($consulta);
                 while ($fila = mysql_fetch_array($resultado)){
-                    echo '<p>'.$fila["nombre"].'</p>';
+                    echo '<form method="POST" action="curso.php">';
+                    echo '<input type="hidden" name="id" value="'.$fila["id"].'" />';
+                    echo '<input type="submit" value="'.$fila["nombre"].'" />';
+                    echo '</form>';
                 }
                 
                 ?>
