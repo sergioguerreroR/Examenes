@@ -3,14 +3,12 @@ include('conexion.php');
 
 $idUnidad = $_POST["idUnidad"];
 
-$consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."'";
+$consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY RAND() LIMIT 20";
 $resultado = mysql_query($consultaPreguntas);
 
 $max = mysql_num_rows($resultado);
 
-$preguntas = mysql_fetch_row($resultado);
 
-var_dump($preguntas);
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +20,31 @@ var_dump($preguntas);
 </head>
 <body>
 	<main>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="..." alt="...">
+                    <div class="carousel-caption">
+                      ...
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="..." alt="...">
+                    <div class="carousel-caption">
+                      ...
+                    </div>
+                  </div>
+                  ...
+                </div>
+            </div>
             <?php
-            echo $preguntas[0];
+            while ($preguntas = mysql_fetch_array($resultado)){
+                echo $preguntas["pregunta"]."<br>";
+            }
+
+            
             ?>
 	</main>
 </body>
