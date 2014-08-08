@@ -23,22 +23,31 @@ if (isset($_POST["iniciar"])) {
 <head>
     <meta charset="UTF-8">
     <title>Examenes_Test</title>
-    <link rel="stylesheet" href="css/estilo.css" type="text/css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/bootstrap.js"></script>
+        <link rel="stylesheet" href="css/estilo.css" type="text/css">
+
 </head>
 <body>
 	<main>
-            
+            <header>
+        
+               </header>
+            <section>
             <form method="POST">
-                <section id="login">
+                <article id="login">
                     <img src="imagenes/usuario2.png" />
                     <input type="text" name="email" placeholder="Email"/>
-                 </section>
-                <section id="password">
+                 </article>
+                <article id="password">
                     <img src="imagenes/contra.png" />
                     <input type="password" name="pass" placeholder="Contraseña"/>
-                    <input type="submit" name="iniciar"/>
-                </section>
+                </article>
+                <article id="btnentrar">
+                    <input type="submit" name="iniciar" value="Entrar" class="btn btn-primary btn-lg">
+                </article>
             </form>
+            </section>
 	</main>
 </body>
 </html>
