@@ -38,6 +38,9 @@ $idUnidad = $_POST["idUnidad"];
             else{
             ?>
             <section>
+                    <div id="carousel" class="carousel slide" data-ride="carousel">
+                        
+                        <div class="carousel-inner">
                 <?php
                 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."'";
                 $resultado = mysql_query($consultaPreguntas);
@@ -45,14 +48,35 @@ $idUnidad = $_POST["idUnidad"];
                 $i = 0;
                 while (($preguntas = mysql_fetch_array($resultado)) && ($i<50)){
                     $i++;
-                    echo $i." - ".$preguntas["id"]."<br>";
-
+                ?>
+                            <div class="item<?php if($i <= 1){echo " active"; }?>">
+                                <div class="finlay-carousel-caption">
+                                    <h3><?php echo $preguntas['id'];?></h3>
+                                    <p><?php echo $preguntas['pregunta']; ?></p>
+                                </div>
+                            </div>
+                <?php
                 }
                 ?>
+                        </div>
+                        <a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>
+                        
+                    </div>
             </section>
             <?php
             }
             ?>
 	</main>
+<script type="text/javascript">
+    $('a[data-slide="next"]').click(function() {
+        $('#carousel').carousel('next');
+    });
+    
+    $('#carousel').each(function(){
+        $(this).carousel({
+            interval: false
+        });
+    });
+</script>
 </body>
 </html>
