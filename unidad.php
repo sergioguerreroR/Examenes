@@ -15,7 +15,7 @@ $idUnidad = $_POST["id"];
 	<main>
             <form method="POST" action="test.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
-                <input type="submit" value="Test" />                
+                <input type="submit" value="Test Programados" />                
             </form>
             <form method="POST" action="examen.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
