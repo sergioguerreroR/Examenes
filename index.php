@@ -27,7 +27,7 @@ if (isset($_POST["iniciar"])) {
 </head>
 <body>
 	<main>
-            <header>Aquí va la imagen de cabecera</header>
+            
             <form method="POST">
                 <section id="login">
                     <img src="imagenes/usuario2.png" />
