@@ -13,6 +13,7 @@ include('conexion.php');
 <body>
 	<main>
             <header></header>
+            <h1>Cursos Disponibles</h1>
             <section>
                 <article>
 		<?php
@@ -20,8 +21,9 @@ include('conexion.php');
                 $resultado = mysql_query($consulta);
                 while ($fila = mysql_fetch_array($resultado)){
                     echo '<form method="POST" action="curso.php">';
-                    echo '<input type="hidden" name="id" value="'.$fila["id"].'" />';
-                    echo '<input type="submit" value="'.$fila["nombre"].'" />';
+                    echo '<input type="hidden" name="id" value="'.$fila["id"].'" class="btn btn-danger" />';
+                    echo '<br>';
+                    echo '<input type="submit" value="'.$fila["nombre"].'" class="btn btn-danger"/>';
                     echo '</form>';
                 }
                 

@@ -3,6 +3,11 @@
 	src: url('fuentes/CreteRound-Regular.ttf');
 }
 
+/*CABECERA*/
+h1{
+    text-align: center;
+}
+
 /*FUENTES*/
 
 #ubica{
