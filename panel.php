@@ -33,7 +33,7 @@ include('conexion.php');
                 </section>
             <footer>
                 <article id="articleboton">
-                <a href="index.php"><button type="button" class="btn btn-success">Volver</button></a>
+                <a href="index.php"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <span id="ubica">Panel de cursos</span>

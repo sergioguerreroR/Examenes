@@ -61,6 +61,11 @@ section{
     margin-left: 5%;
 }
 
+#sectionunidad{
+    width: 90%;
+    margin-left: 5%;
+}
+
 /*TAMAÑO ARTICLES*/
 article{
     vertical-align: top;
@@ -86,6 +91,10 @@ text-align: left;
     width: 49%;
     text-align: right;
     padding-right: 15px;
+}
+
+.articleunidad{
+    width: 32%;
 }
 
 /**/
