@@ -1,7 +1,15 @@
 @font-face{
 	font-family: ubicacion;
-	src: url('fuentes/CreteRound-Regular.ttf');
+	src: url('fuentes/CreteRound-Regular.otf');
 }
+@font-face{
+	font-family: nombretabla;
+	src: url('fuentes/Comfortaa_Regular.ttf');
+}
+
+
+
+
 
 /*CABECERA*/
 h1{
@@ -38,21 +46,49 @@ main{
 
 header{
     width: 100%;
-    height: 30%;
+    height: 20%;
 }
 
+/*TAMAÑO SECTIONS*/
 section{
     width: 100%;
-    height: 100%;
+    height: 400px;
+    
 }
 
+#sectiontest{
+    width: 90%;
+    margin-left: 5%;
+}
+
+/*TAMAÑO ARTICLES*/
 article{
     vertical-align: top;
     width: 49%;
-    height: 60%;
+    height: 50%;
     display: inline-block;
     text-align: center;
+    
 }
+
+#articlecurso{
+width: 90%;
+margin-left: 5%;
+text-align: left;
+
+}
+#articleboton{
+    width: 49%;
+    text-align: left;
+}
+
+#articleubicacion{
+    width: 49%;
+    text-align: right;
+    padding-right: 15px;
+}
+
+/**/
 
 #btnentrar{
     margin-top: 60px;
@@ -63,17 +99,13 @@ article{
 footer{
     width: 100%;
     vertical-align: bottom;
+    position: relative;
     margin-top: 16px;
     margin-left: 22px;
+    
 }
 
-#articleboton{
-    width: 49%;
-    text-align: left;
-}
-
-#articleubicacion{
-    width: 49%;
-    text-align: right;
-    padding-right: 15px;
+td{
+    font-family: nombretabla;
+    font-weight: bold;
 }

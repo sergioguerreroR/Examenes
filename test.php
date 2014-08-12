@@ -14,13 +14,14 @@ $num = mysql_num_rows($enumeracion);
     <title>Examenes_Test</title>
     <script src="js/jquery-1.11.0.min.js" ></script>
     <script src="js/bootstrap.js"></script>
-    
+    <script src="js/funciones.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="css/estilo.css" type="text/css" />
     
 </head>
 <body>
 	<main>
+            <header></header>
             <?php
             if(!isset($_POST["test"])){
             ?>
@@ -46,7 +47,7 @@ $num = mysql_num_rows($enumeracion);
             }
             else{
             ?>
-            <section>
+            <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
                         
                         <div class="carousel-inner">

@@ -7,29 +7,30 @@ include('conexion.php');
     <meta charset="UTF-8">
     <title>Examenes_Test</title>
     <script src="js/bootstrap.js"></script>
+    <script src="js/funciones.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="css/estilo.css" type="text/css">
 </head>
 <body>
 	<main>
             <header></header>
-            <h1>Cursos Disponibles</h1>
             <section>
+                <h1>Cursos Disponibles</h1>
                 <article>
 		<?php
                 $consulta = "SELECT * FROM cursos";
                 $resultado = mysql_query($consulta);
                 while ($fila = mysql_fetch_array($resultado)){
                     echo '<form method="POST" action="curso.php">';
-                    echo '<input type="hidden" name="id" value="'.$fila["id"].'" class="btn btn-danger" />';
+                    echo '<input type="hidden" name="id" value="'.$fila["id"].'" />';
                     echo '<br>';
-                    echo '<input type="submit" value="'.$fila["nombre"].'" class="btn btn-danger"/>';
+                    echo '<input type="submit" value="'.$fila["nombre"].'"/>';
                     echo '</form>';
                 }
                 
                 ?>
                 </article>
-                <section>
+                </section>
             <footer>
                 <article id="articleboton">
                 <a href="index.php"><button type="button" class="btn btn-success">Volver</button></a>
