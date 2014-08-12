@@ -1,7 +1,13 @@
 <?php
 include('conexion.php');
 
-$idCurso = $_POST["id"];
+if(isset($_POST["id"])){
+    $idCurso = $_POST["id"];
+}
+else{
+    $idCurso = $_GET["id"];
+}
+
 
 $consultaUnidades = "SELECT * FROM unidades WHERE id_cursos = '".$idCurso."'";
 $resultadoUnidades = mysql_query($consultaUnidades);

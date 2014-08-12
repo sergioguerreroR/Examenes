@@ -56,16 +56,22 @@ $num = mysql_num_rows($enumeracion);
                 $resultado = mysql_query($consultaPreguntas);
                 mysql_data_seek($resultado, $_POST["testNumero"]);
                 $i = 0;
+                function mover($numero){
+                    mysql_data_seek($resultado, $numero);
+                }
                 while (($preguntas = mysql_fetch_array($resultado)) && ($i<50)){
                     $i++;
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
                                     <h3><?php echo $preguntas['pregunta'];?></h3>
-                                    <button><p><?php echo $preguntas['respuesta1']; ?></p></button>
-                                    <p><?php echo $preguntas['respuesta2']; ?></p>
-                                    <p><?php echo $preguntas['respuesta3']; ?></p>
-                                    <p><?php echo $preguntas['respuesta4']; ?></p>
+                                    <input type="hidden" contador
+                                    <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i; ?>"/>
+                                    <p><button onclick="valida(this.value);" value="respuesta1" class="respuesta"><?php echo $preguntas['respuesta1']; ?></button></p>
+                                    <p><button onclick="valida(this.value);" value="respuesta2" class="respuesta"><?php echo $preguntas['respuesta2']; ?></button></p>
+                                    <p><button onclick="valida(this.value);" value="respuesta3" class="respuesta"><?php echo $preguntas['respuesta3']; ?></button></p>
+                                    <p><button onclick="valida(this.value);" value="respuesta4" class="respuesta"><?php echo $preguntas['respuesta4']; ?></button></p>
+                                    <p id="explicacion" style="display: none;visibility: hidden;"><?php echo $preguntas['explicacion']; ?></p>
                                 </div>
                             </div>
                 <?php
@@ -73,7 +79,6 @@ $num = mysql_num_rows($enumeracion);
                 ?>
                         </div>
                         <a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>
-                        
                     </div>
             </section>
             <?php
