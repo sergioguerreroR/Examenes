@@ -3,12 +3,9 @@ include('conexion.php');
 
 $idUnidad = $_POST["id"];
 
-$idUnidad = $_POST["id"];
-
-
-$consultacurso = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
-$resultadocurso = mysql_query($consultacurso);
-$curso = mysql_fetch_array($resultadocurso);
+$consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
+$resultadoUnidades = mysql_query($consultaUnidades);
+$unidad = mysql_fetch_array($resultadoUnidades);
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +45,7 @@ $curso = mysql_fetch_array($resultadocurso);
             </section>
             <footer>
                 <article id="articleboton">
-                <a href="curso.php"><img src="imagenes/anterior.png" /></a>
+                <a href="curso.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php
