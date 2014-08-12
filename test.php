@@ -61,7 +61,7 @@ $num = mysql_num_rows($enumeracion);
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
                                     <h3><?php echo $preguntas['pregunta'];?></h3>
-                                    <p><?php echo $preguntas['respuesta1']; ?></p>
+                                    <button><p><?php echo $preguntas['respuesta1']; ?></p></button>
                                     <p><?php echo $preguntas['respuesta2']; ?></p>
                                     <p><?php echo $preguntas['respuesta3']; ?></p>
                                     <p><?php echo $preguntas['respuesta4']; ?></p>
