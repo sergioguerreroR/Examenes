@@ -23,9 +23,10 @@ if (isset($_POST["iniciar"])) {
 <head>
     <meta charset="UTF-8">
     <title>Examenes_Test</title>
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <script src="js/bootstrap.js"></script>
-        <link rel="stylesheet" href="css/estilo.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/estilo.css" type="text/css">
+    <script src="js/funciones.js"></script>
 
 </head>
 <body>
