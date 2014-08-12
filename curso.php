@@ -62,7 +62,7 @@ $curso = mysql_fetch_array($resultadocurso);
                 </section>
             <footer>
                 <article id="articleboton">
-                <a href="index.php"><button type="button" class="btn btn-danger">Volver</button></a>
+                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php
