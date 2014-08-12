@@ -2,6 +2,9 @@
 include('conexion.php');
 
 $idUnidad = $_POST["idUnidad"];
+$consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
+$enumeracion = mysql_query($consultaPreguntas);
+$num = mysql_num_rows($enumeracion);
 ?>
 
 <!DOCTYPE html>
@@ -22,16 +25,22 @@ $idUnidad = $_POST["idUnidad"];
             if(!isset($_POST["test"])){
             ?>
             <section>
+                <?php
+                $numTest = 0;
+                for ($i = 0;$i<=$num;$i++){
+                    if ($i % 50 == 0){
+                        ++$numTest;
+                ?>
                 <form method="POST">
                     <input type="hidden" name="idUnidad" value="<?php echo $idUnidad;?>"/>
-                    <input type="hidden" name="testNumero" value="0"/>
-                    <input type="submit" name="test" value="TEST 1"/>
+                    <input type="hidden" name="testNumero" value="<?php echo $i;?>"/>
+                    <input type="submit" name="test" value="TEST <?php echo $numTest?>"/>
                 </form>
-                <form method="POST">
-                    <input type="hidden" name="idUnidad" value="<?php echo $idUnidad;?>"/>
-                    <input type="hidden" name="testNumero" value="50"/>
-                    <input type="submit" name="test" value="TEST 2"/>
-                </form>
+                <?php
+                    }
+
+                }
+                ?>
             </section>
             <?php
             }
@@ -51,8 +60,11 @@ $idUnidad = $_POST["idUnidad"];
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
-                                    <h3><?php echo $preguntas['id'];?></h3>
-                                    <p><?php echo $preguntas['pregunta']; ?></p>
+                                    <h3><?php echo $preguntas['pregunta'];?></h3>
+                                    <p><?php echo $preguntas['respuesta1']; ?></p>
+                                    <p><?php echo $preguntas['respuesta2']; ?></p>
+                                    <p><?php echo $preguntas['respuesta3']; ?></p>
+                                    <p><?php echo $preguntas['respuesta4']; ?></p>
                                 </div>
                             </div>
                 <?php
