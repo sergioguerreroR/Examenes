@@ -5,6 +5,10 @@ $idUnidad = $_POST["idUnidad"];
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
+
+if(isset($_POST["resultados"])){
+    $resultados = $_POST["resultados"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,33 +56,53 @@ $num = mysql_num_rows($enumeracion);
                         
                         <div class="carousel-inner">
                 <?php
-                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."'";
+                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id ASC";
                 $resultado = mysql_query($consultaPreguntas);
+                
+                $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id DESC LIMIT 1";
+                $resultadoUltimo  = mysql_query($consultaUltimo);
+                $ultimo = mysql_fetch_array($resultadoUltimo);
+
                 mysql_data_seek($resultado, $_POST["testNumero"]);
+                
                 $i = 0;
-                function mover($numero){
-                    mysql_data_seek($resultado, $numero);
-                }
-                while (($preguntas = mysql_fetch_array($resultado)) && ($i<50)){
+                while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
                     $i++;
+                    
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
                                     <h3><?php echo $preguntas['pregunta'];?></h3>
-                                    <input type="hidden" contador
-                                    <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i; ?>"/>
-                                    <p><button onclick="valida(this.value);" value="respuesta1" class="respuesta"><?php echo $preguntas['respuesta1']; ?></button></p>
-                                    <p><button onclick="valida(this.value);" value="respuesta2" class="respuesta"><?php echo $preguntas['respuesta2']; ?></button></p>
-                                    <p><button onclick="valida(this.value);" value="respuesta3" class="respuesta"><?php echo $preguntas['respuesta3']; ?></button></p>
-                                    <p><button onclick="valida(this.value);" value="respuesta4" class="respuesta"><?php echo $preguntas['respuesta4']; ?></button></p>
-                                    <p id="explicacion" style="display: none;visibility: hidden;"><?php echo $preguntas['explicacion']; ?></p>
+                                    <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
+                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta1']; ?></button></p>
+                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p>
+                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta3']; ?></button></p>
+                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta4']; ?></button></p>
+                                    <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $preguntas['explicacion']; ?></p>
+                                    <p>
+                                        <?php 
+                                        
+                                        //echo $preguntas["id"][0];
+                                        if($i == 50 || ($preguntas["id"] == $ultimo["id"])){
+                                            echo "<form method='POST'>";
+                                            echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
+                                            echo "<input type='hidden' name='resultados' id='resultados'/>";
+                                            echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
+                                            echo "</form>";
+                                        }
+                                        else{
+                                            echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>';
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                 <?php
+                    
                 }
                 ?>
                         </div>
-                        <a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>
+                        
                     </div>
             </section>
             <?php

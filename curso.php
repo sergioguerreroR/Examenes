@@ -8,7 +8,6 @@ else{
     $idCurso = $_GET["id"];
 }
 
-echo $idCurso;
 $consultaUnidades = "SELECT * FROM unidades WHERE id_cursos = '".$idCurso."'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 

@@ -49,7 +49,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 </article>
                 <article id="articleubicacion">
                     <?php
-                    echo '<span id="ubica">'.$curso['nombre'].'</span>';
+                    echo '<span id="ubica">'.$unidad['nombre'].'</span>';
                     ?>
                 </article>
             </footer>
