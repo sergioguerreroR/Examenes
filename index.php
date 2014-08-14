@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('conexion.php');
 
 if (isset($_POST["iniciar"])) {
@@ -7,8 +8,11 @@ if (isset($_POST["iniciar"])) {
     
     $consulta = "SELECT * FROM usuarios WHERE email = '".$email."' AND pass = '".$pass."'";
     $resultado = mysql_query($consulta);
+    $usuario = mysql_fetch_array($resultado);
     $num = mysql_num_rows($resultado);
     if ($num == 1) {
+        $_SESSION["usuarioId"] = $usuario["id"];
+        $_SESSION["usuarioNombre"] = $usuario["nombre"];
         echo "<script>window.location.href='panel.php'</script>";
     }
     else{

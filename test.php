@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('conexion.php');
 
 $idUnidad = $_POST["idUnidad"];
@@ -11,6 +12,11 @@ $num = mysql_num_rows($enumeracion);
 $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 $unidad = mysql_fetch_array($resultadoUnidades);
+
+if (isset($_POST["resultados"])){
+    $resultadosString = $_POST["resultados"];
+    $resultados = explode(",", $resultadosString);
+}
 
 ?>
 
