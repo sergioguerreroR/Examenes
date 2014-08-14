@@ -55,12 +55,12 @@ header{
 /*TAMAÑO SECTIONS*/
 section{
     width: 100%;
-    height: 400px;
+    min-height: 400px;
 }
 
 #sectionindex{
         width: 100%;
-        height: 400px;
+        min-height: 400px;
         margin-top: 76px;
 }
 
@@ -166,3 +166,6 @@ td{
 
 
 /*Tablatemas*/
+table{
+    position: relative;
+}
