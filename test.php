@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('conexion.php');
+$usuarioId = $_SESSION["usuarioId"];
+echo $usuarioId;
 
 $idUnidad = $_POST["idUnidad"];
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
@@ -13,9 +15,32 @@ $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 $unidad = mysql_fetch_array($resultadoUnidades);
 
+$aciertos = 0;
+$fallos = 0;
+$blancos = 0;
 if (isset($_POST["resultados"])){
+    //Recogemos el String con los resultados
     $resultadosString = $_POST["resultados"];
+    
+    //Lo transformamos a array y buscamos los aciertos,fallos y blancos
     $resultados = explode(",", $resultadosString);
+    foreach ($resultados as $value){
+        if($value == "acierto"){
+            $aciertos++;
+        }
+        elseif($value == "fallo"){
+            $fallos++;
+        }
+        else{
+            $blancos++;
+        }
+    }
+    
+    //Recogemos el resto de variables
+    $numero = $_POST["testNumero"];
+    $usuarioId = $_SESSION["usuarioId"];
+    
+    //$consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_usuario,id_unidad) VALUES('".$numero."')";
 }
 
 ?>
@@ -90,6 +115,7 @@ if (isset($_POST["resultados"])){
                         
                         <div class="carousel-inner">
                 <?php
+                $testNumero = $_POST["testNumero"];
                 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id ASC";
                 $resultado = mysql_query($consultaPreguntas);
                 
@@ -97,7 +123,7 @@ if (isset($_POST["resultados"])){
                 $resultadoUltimo  = mysql_query($consultaUltimo);
                 $ultimo = mysql_fetch_array($resultadoUltimo);
 
-                mysql_data_seek($resultado, $_POST["testNumero"]);
+                mysql_data_seek($resultado, $testNumero);
                 
                 $i = 0;
                 while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
@@ -120,6 +146,7 @@ if (isset($_POST["resultados"])){
                                         if($i == 50 || ($preguntas["id"] == $ultimo["id"])){
                                             echo "<form method='POST'>";
                                             echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
+                                            echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
                                             echo "<input type='hidden' name='resultados' id='resultados'/>";
                                             echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
                                             echo "</form>";
