@@ -33,9 +33,9 @@ body{
 }
 
 main{
-    margin-top: 20px;
+        margin-top: 20px;
 	width: 65%;
-	height: 615px;
+	min-height: 100%;
 	background: url('../imagenes/fondo3.png');
 	display: inline-block;
 	text-align: left;
@@ -48,11 +48,9 @@ main{
 /*HEADERS*/
 header{
     width: 100%;
-    height: 20%;
+    height: 100px;
 }
-#headerindex{
-    height: 35%;
-}
+
 
 /*TAMAÑO SECTIONS*/
 section{
@@ -60,6 +58,11 @@ section{
     height: 400px;
 }
 
+#sectionindex{
+        width: 100%;
+        height: 400px;
+        margin-top: 76px;
+}
 
 /*TAMAÑO ARTICLES*/
 article{
@@ -161,3 +164,5 @@ td{
     transition: width 0.5s, height 0.5s, transform 0.5s;
 }
 
+
+/*Tablatemas*/
