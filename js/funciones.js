@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var array = new Array();
 
-
-function valida(respuesta){
-    var respuestas = document.getElementsByClassName("respuesta");
+function valida(respuesta,numero){
+    var respuestas = document.getElementsByClassName("pregunta"+numero);
     var i = respuestas.length;
-    var correcta = document.getElementById("respuesta_correcta").value;
+    var correcta = document.getElementById("respuesta_correcta"+numero).value;
     
     if (respuesta == correcta){
         while(i--){
             if(respuesta == respuestas[i].value){
                 respuestas[i].style.border = "2px solid green";
+                document.getElementById("explicacion"+numero).style.display = "block";
+                resultados(numero,"acierto");
             }
         }
     }
@@ -21,17 +23,20 @@ function valida(respuesta){
         while(i--){
             if(correcta == respuestas[i].value){
                 respuestas[i].style.border = "2px solid green";
+                document.getElementById("explicacion"+numero).style.display = "block";
+                resultados(numero,"fallo");
             }
         }
     }
-    //document.getElementById("explicacion").style.display = "block";
+    
 }
 
-function resetCSS(){
-    var respuestas = document.getElementsByClassName("respuesta");
-    var i = respuestas.length;
+function resultados(numero,resultado){
     
-    while(i--){
-        respuestas[i].style.border = "";
-    }
+    array[numero-1] = resultado;
+    
+}
+
+function arrayResultados(){
+    document.getElementById("resultados").value = window.array.toString();
 }
