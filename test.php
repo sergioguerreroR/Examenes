@@ -35,7 +35,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
             <section>
                 <h1>Test</h1>
                 <article id="articleTest">
-                    <table id="tablatemas" class="table table-condensed">
+                    <table id="tablatest" class="table table-condensed">
                         <thead>
                         <tr>
                         <th>Tema</th>

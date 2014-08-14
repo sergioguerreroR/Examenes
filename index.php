@@ -31,10 +31,9 @@ if (isset($_POST["iniciar"])) {
 </head>
 <body>
 	<main>
-            <header id="headerindex">
-        
+            <header>
             </header>
-            <section>
+            <section id="sectionindex">
             <form method="POST">
                 <article id="login">
                     <img src="imagenes/usuario2.png" />
