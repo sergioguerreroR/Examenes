@@ -5,6 +5,13 @@ $idUnidad = $_POST["idUnidad"];
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
+
+
+
+$consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
+$resultadoUnidades = mysql_query($consultaUnidades);
+$unidad = mysql_fetch_array($resultadoUnidades);
+
 ?>
 
 <!DOCTYPE html>
@@ -26,22 +33,47 @@ $num = mysql_num_rows($enumeracion);
             if(!isset($_POST["test"])){
             ?>
             <section>
+                <h1>Test</h1>
+                <article id="articleTest">
+                    <table id="tablatemas" class="table table-condensed">
+                        <thead>
+                        <tr>
+                        <th>Tema</th>
+                        <th>Evaluación</th>
+                        <th>Aciertos</th>
+                        <th>Errores</th>
+                        <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
                 <?php
                 $numTest = 0;
                 for ($i = 0;$i<=$num;$i++){
                     if ($i % 50 == 0){
                         ++$numTest;
                 ?>
+                        <tr>
                 <form method="POST">
                     <input type="hidden" name="idUnidad" value="<?php echo $idUnidad;?>"/>
                     <input type="hidden" name="testNumero" value="<?php echo $i;?>"/>
-                    <input type="submit" name="test" value="TEST <?php echo $numTest?>"/>
+                    <td>Test <?php echo $numTest?></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" name="test" value="Entrar" class="btn btn-success btn-xs"></td>
                 </form>
+
                 <?php
                     }
+                                       echo '</tr>';
+                    
+                  
 
                 }
                 ?>
+                        </tbody>
+                        </table>
+                </article>
             </section>
             <?php
             }
@@ -84,7 +116,18 @@ $num = mysql_num_rows($enumeracion);
             <?php
             }
             ?>
+            <footer>
+                <article id="articleboton">
+                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
+                </article>
+                <article id="articleubicacion">
+                    <?php
+                    echo '<span id="ubica">'.$unidad['nombre'].'</span>';
+                    ?>
+                </article>
+            </footer>
 	</main>
+        
 <script type="text/javascript">
     $('a[data-slide="next"]').click(function() {
         $('#carousel').carousel('next');

@@ -6,9 +6,10 @@
 	font-family: nombretabla;
 	src: url('fuentes/Comfortaa_Regular.ttf');
 }
-
-
-
+@font-face{
+	font-family: nombreboton;
+	src: url('fuentes/Aclonica.ttf');
+}
 
 
 /*CABECERA*/
@@ -44,27 +45,21 @@ main{
 
 }
 
+/*HEADERS*/
 header{
     width: 100%;
     height: 20%;
+}
+#headerindex{
+    height: 35%;
 }
 
 /*TAMAÑO SECTIONS*/
 section{
     width: 100%;
     height: 400px;
-    
 }
 
-#sectiontest{
-    width: 90%;
-    margin-left: 5%;
-}
-
-#sectionunidad{
-    width: 90%;
-    margin-left: 5%;
-}
 
 /*TAMAÑO ARTICLES*/
 article{
@@ -80,12 +75,27 @@ article{
 width: 90%;
 margin-left: 5%;
 text-align: left;
-
 }
+
+#articleTest{
+    width: 90%;
+    margin-left: 5%;
+    text-align: left;
+}
+
 #articleboton{
     width: 49%;
     text-align: left;
 }
+
+#articlepanel{
+    width: 46%;
+    text-align: center;
+    margin-left: 3%;
+
+}
+
+
 
 #articleubicacion{
     width: 49%;
@@ -105,6 +115,7 @@ text-align: left;
     text-align: center;        
 }
 
+
 footer{
     width: 100%;
     vertical-align: bottom;
@@ -113,8 +124,40 @@ footer{
     margin-left: 22px;
     
 }
-
+/*tablita*/
 td{
     font-family: nombretabla;
     font-weight: bold;
 }
+
+/*botones*/
+#botontestprogramados{
+    min-height: 170px;
+    min-width: 247px;
+    background-color: transparent;
+    border: 0;
+    background-image: url('../imagenes/test_programados.png');
+}
+
+#botontitulotranspor{
+    min-height: 189px;
+    min-width: 290px;
+    padding-bottom: 145px;
+    font-size: 15px;
+    border: 0;
+    background-image: url('../imagenes/fondoboton.png');
+    font-weight: bold;
+    box-shadow: 1px 1px 1px 5px;
+    border-radius: 7px;
+    
+    
+}
+
+#botontitulotranspor:hover{
+    transform: scale(1.05,1.05);
+    -moz-transform: scale(1.05,1.05);
+    -webkit-transform: scale(1.05,1.05);
+    -ms-transform: scale(1.05,1.05);
+    transition: width 0.5s, height 0.5s, transform 0.5s;
+}
+

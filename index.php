@@ -31,9 +31,9 @@ if (isset($_POST["iniciar"])) {
 </head>
 <body>
 	<main>
-            <header>
+            <header id="headerindex">
         
-               </header>
+            </header>
             <section>
             <form method="POST">
                 <article id="login">

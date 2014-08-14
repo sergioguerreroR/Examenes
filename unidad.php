@@ -27,7 +27,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 <article class="articleunidad">
             <form method="POST" action="test.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
-                <input type="submit" value="Test Programados" />                
+                <button id="botontestprogramados" type="submit" value="Test Programados" />                
             </form>
                 </article>
                 <article class="articleunidad">
@@ -49,7 +49,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 </article>
                 <article id="articleubicacion">
                     <?php
-                    echo '<span id="ubica">'.$curso['nombre'].'</span>';
+                    echo '<span id="ubica">'.$unidad['nombre'].'</span>';
                     ?>
                 </article>
             </footer>

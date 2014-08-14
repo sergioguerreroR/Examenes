@@ -8,14 +8,12 @@ else{
     $idCurso = $_GET["id"];
 }
 
-echo $idCurso;
 $consultaUnidades = "SELECT * FROM unidades WHERE id_cursos = '".$idCurso."'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 
 $consultacurso = "SELECT * FROM cursos WHERE id='" .$idCurso. "'";
 $resultadocurso = mysql_query($consultacurso);
 $curso = mysql_fetch_array($resultadocurso);
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,33 +28,33 @@ $curso = mysql_fetch_array($resultadocurso);
 <body>
 	<main>
             <header></header>
-            
             <section>
                 <h1>Temas</h1>
                 <article id="articlecurso">
                     <table id="tablatemas" class="table table-condensed">
+                        <thead>
                         <tr>
                         <th>Tema</th>
                         <th>Evaluación</th>
-                        <th>Aciertos</th>
-                        <th>Errores</th>
                         <th></th>
                         </tr>
+                        </thead>
+                        <tbody>
 		<?php
-                    
                 while ($unidad = mysql_fetch_array($resultadoUnidades)){
-                    echo'<tr>';
+                    echo '<tr>';
                     echo '<td>'.$unidad["nombre"].'</td>';
                     echo '<td></td>';
                     echo '<td></td>';
                     echo '<td></td>';
                     echo '<form method="POST" action="unidad.php">';
                     echo '<input type="hidden" name="id" value="'.$unidad["id"].'" />';
-                    echo '<td><input type="submit" value="Realizar Test"/ class="btn btn-success btn-xs"></td>';
+                    echo '<td><input type="submit" value="Entrar"/ class="btn btn-success btn-xs"></td>';
                     echo '</form>';
                     echo'</tr>';
                 }
                 ?>
+                            </tbody>
                 </table>
                 </article>
                 </section>
@@ -72,5 +70,4 @@ $curso = mysql_fetch_array($resultadocurso);
             </footer>
 	</main>
 </body>
-</html>
-
+</html> 
