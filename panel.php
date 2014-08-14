@@ -16,20 +16,22 @@ include('conexion.php');
             <header></header>
             <section>
                 <h1>Cursos Disponibles</h1>
-                <article>
+                
 		<?php
                 $consulta = "SELECT * FROM cursos";
                 $resultado = mysql_query($consulta);
                 while ($fila = mysql_fetch_array($resultado)){
+                    echo '<article id="articlepanel">';
                     echo '<form method="POST" action="curso.php">';
                     echo '<input type="hidden" name="id" value="'.$fila["id"].'" />';
                     echo '<br>';
-                    echo '<input type="submit" value="'.$fila["nombre"].'"/>';
+                    echo '<button id="botontitulotranspor" type="submit"><span id="nombretitu"> '.$fila["nombre"].'</span></button>';
                     echo '</form>';
+                    echo '</article>';
+                    
                 }
                 
                 ?>
-                </article>
                 </section>
             <footer>
                 <article id="articleboton">

@@ -27,7 +27,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 <article class="articleunidad">
             <form method="POST" action="test.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
-                <input type="submit" value="Test Programados" />                
+                <button id="botontestprogramados" type="submit" value="Test Programados" />                
             </form>
                 </article>
                 <article class="articleunidad">
