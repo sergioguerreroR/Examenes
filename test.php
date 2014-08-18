@@ -1,10 +1,15 @@
 <?php
 session_start();
 include('conexion.php');
-$usuarioId = $_SESSION["usuarioId"];
-echo $usuarioId;
 
-$idUnidad = $_POST["idUnidad"];
+if(isset($_POST["idUnidad"])){
+    $idUnidad = $_POST["idUnidad"];
+}
+ else {
+    $idUnidad = $_SESSION["idUnidad"];
+}
+
+$usuarioId = $_SESSION["usuarioId"];
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
@@ -40,7 +45,11 @@ if (isset($_POST["resultados"])){
     $numero = $_POST["testNumero"];
     $usuarioId = $_SESSION["usuarioId"];
     
-    //$consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_usuario,id_unidad) VALUES('".$numero."')";
+    $consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_unidades,id_usuario) VALUES('".$numero."','".$aciertos."','".$fallos."','".$blancos."','".$idUnidad."','".$usuarioId."')";
+    if(mysql_query($consultaResultados)){
+        $_SESSION["idUnidad"] = $idUnidad;
+        echo "<script>window.location.href='test.php'</script>";
+    }
 }
 
 ?>
@@ -62,6 +71,9 @@ if (isset($_POST["resultados"])){
             <header></header>
             <?php
             if(!isset($_POST["test"])){
+                $consultaTest = "SELECT * FROM test WHERE id_unidades = '".$idUnidad."' AND id_usuario = '".$usuarioId."'";
+                $resultadoTest = mysql_query($consultaTest);
+                
             ?>
             <section>
                 <h1>Test</h1>
@@ -86,8 +98,17 @@ if (isset($_POST["resultados"])){
                         <tr>
                 <form method="POST">
                     <input type="hidden" name="idUnidad" value="<?php echo $idUnidad;?>"/>
-                    <input type="hidden" name="testNumero" value="<?php echo $i;?>"/>
+                    <input type="hidden" name="testNumero" value="<?php echo $numTest;?>"/>
                     <td>Test <?php echo $numTest?></td>
+                    <?php
+                        while ($test = mysql_fetch_array($resultadoTest)){
+                            if ($test["numero"] == $numTest){
+                                $aciertosTest = $test["aciertos"];
+                                $fallosTest = $test["fallos"];
+                                $blancosTest = $test["blancos"];
+                            }
+                        }
+                    ?>
                     <td></td>
                     <td></td>
                     <td></td>
