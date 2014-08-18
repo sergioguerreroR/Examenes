@@ -70,10 +70,7 @@ if (isset($_POST["resultados"])){
 	<main>
             <header></header>
             <?php
-            if(!isset($_POST["test"])){
-                $consultaTest = "SELECT * FROM test WHERE id_unidades = '".$idUnidad."' AND id_usuario = '".$usuarioId."'";
-                $resultadoTest = mysql_query($consultaTest);
-                
+            if(!isset($_POST["test"])){               
             ?>
             <section>
                 <h1>Test</h1>
@@ -101,17 +98,13 @@ if (isset($_POST["resultados"])){
                     <input type="hidden" name="testNumero" value="<?php echo $numTest;?>"/>
                     <td>Test <?php echo $numTest?></td>
                     <?php
-                        while ($test = mysql_fetch_array($resultadoTest)){
-                            if ($test["numero"] == $numTest){
-                                $aciertosTest = $test["aciertos"];
-                                $fallosTest = $test["fallos"];
-                                $blancosTest = $test["blancos"];
-                            }
-                        }
+                    $consultaTest = "SELECT * FROM test WHERE id_unidades = '".$idUnidad."' AND id_usuario = '".$usuarioId."' AND numero = '".$numTest."'";
+                    $resultadoTest = mysql_query($consultaTest);
+                    $test = mysql_fetch_array($resultadoTest);
                     ?>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $test["aciertos"];?></td>
+                    <td><?php echo $test["fallos"];?></td>
                     <td><input type="submit" name="test" value="Entrar" class="btn btn-success btn-xs"></td>
                 </form>
 
