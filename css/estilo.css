@@ -64,6 +64,10 @@ section{
         margin-top: 76px;
 }
 
+#sectionunidad{
+    margin-top: 80px;   
+}
+
 /*TAMAÑO ARTICLES*/
 article{
     vertical-align: top;
@@ -107,7 +111,15 @@ text-align: left;
 }
 
 .articleunidad{
-    width: 32%;
+    width: 33%;
+}
+
+#botonprogramados{
+    padding-left: 25px
+}
+
+#botonexamenes{
+    padding-left: 10px;
 }
 
 /**/
@@ -134,12 +146,60 @@ td{
 }
 
 /*botones*/
+#botontestexamenes{
+    min-height: 210px;
+    min-width: 247px;
+    background-color: transparent;
+    border: 0;
+    background-image: url('../imagenes/test_examen.png');
+    transition: width 0.5s, height 0.5s, transform 0.5s; 
+}
+
+#botontestexamenes:hover{
+    transform: scale(1.05,1.05);
+    -moz-transform: scale(1.05,1.05);
+    -webkit-transform: scale(1.05,1.05);
+    -ms-transform: scale(1.05,1.05);
+    transition: width 0.5s, height 0.5s, transform 0.5s; 
+}
+
+
+#botoncasospracticos{
+    min-height: 210px;
+    min-width: 247px;
+    background-color: transparent;
+    border: 0;
+    background-image: url('../imagenes/casos_practicos.png');
+    transition: width 0.5s, height 0.5s, transform 0.5s; 
+}
+
+#botoncasospracticos:hover{
+    transform: scale(1.05,1.05);
+    -moz-transform: scale(1.05,1.05);
+    -webkit-transform: scale(1.05,1.05);
+    -ms-transform: scale(1.05,1.05);
+    transition: width 0.5s, height 0.5s, transform 0.5s; 
+}
+
+
+
+
 #botontestprogramados{
-    min-height: 170px;
+    min-height: 210px;
     min-width: 247px;
     background-color: transparent;
     border: 0;
     background-image: url('../imagenes/test_programados.png');
+    transition: width 0.5s, height 0.5s, transform 0.5s;   
+
+}
+
+#botontestprogramados:hover{
+    transform: scale(1.05,1.05);
+    -moz-transform: scale(1.05,1.05);
+    -webkit-transform: scale(1.05,1.05);
+    -ms-transform: scale(1.05,1.05);
+    transition: width 0.5s, height 0.5s, transform 0.5s;   
 }
 
 #botontitulotranspor{
@@ -152,7 +212,8 @@ td{
     font-weight: bold;
     box-shadow: 1px 1px 1px 5px;
     border-radius: 7px;
-    
+    transition: width 0.5s, height 0.5s, transform 0.5s;   
+
     
 }
 
@@ -163,6 +224,7 @@ td{
     -ms-transform: scale(1.05,1.05);
     transition: width 0.5s, height 0.5s, transform 0.5s;
 }
+
 
 
 /*Tablatemas*/

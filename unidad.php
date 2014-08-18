@@ -24,23 +24,22 @@ $unidad = mysql_fetch_array($resultadoUnidades);
 	<main>
             <header></header>
             <section id="sectionunidad">
-                <h1>Tipos de test</h1>
-                <article class="articleunidad">
+                <article id="botonprogramados" class="articleunidad">
             <form method="POST" action="test.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
                 <button id="botontestprogramados" type="submit" value="Test Programados" />                
             </form>
                 </article>
-                <article class="articleunidad">
+                <article id="botonexamenes" class="articleunidad">
             <form method="POST" action="examen.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
-                <input type="submit" value="Test de Examen" />                
+                <button id="botontestexamenes" type="submit" value="Test Programados" />                
             </form>
                 </article>
                 <article class="articleunidad">
             <form method="POST" action="practicos.php">
                 <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
-                <input type="submit" value="Casos practicos" />                
+                <button id="botoncasospracticos" type="submit" value="Test Programados" />                
             </form>
                 </article>
             </section>
