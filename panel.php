@@ -14,7 +14,10 @@ include('conexion.php');
 </head>
 <body>
 	<main>
-            <header></header>
+            <header>
+                <?php echo $_SESSION["usuarioNombre"];?>
+                <a href="index.php">Cerrar sesión</a>
+            </header>
             <section>
                 <h1>Cursos Disponibles</h1>
                 

@@ -22,7 +22,10 @@ $unidad = mysql_fetch_array($resultadoUnidades);
 </head>
 <body>
 	<main>
-            <header></header>
+            <header>
+                <?php echo $_SESSION["usuarioNombre"];?>
+                <a href="index.php">Cerrar sesión</a>
+            </header>
             <section id="sectionunidad">
                 <article id="botonprogramados" class="articleunidad">
             <form method="POST" action="test.php">

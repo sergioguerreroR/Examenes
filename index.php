@@ -1,5 +1,8 @@
 <?php
 session_start();
+session_unset();
+session_destroy();
+session_start();
 include('conexion.php');
 
 if (isset($_POST["iniciar"])) {
@@ -36,6 +39,8 @@ if (isset($_POST["iniciar"])) {
 <body>
 	<main>
             <header>
+                <?php echo $_SESSION["usuarioNombre"];?>
+                <a href="index.php">Cerrar sesión</a>
             </header>
             <section id="sectionindex">
             <form method="POST">

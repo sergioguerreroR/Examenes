@@ -25,6 +25,10 @@ $max = mysql_num_rows($resultado);
 </head>
 <body>
 	<main>
+            <header>
+                <?php echo $_SESSION["usuarioNombre"];?>
+                <a href="index.php">Cerrar sesión</a>
+            </header>
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
                 <!-- Wrapper for slides -->

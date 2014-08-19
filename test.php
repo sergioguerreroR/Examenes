@@ -2,7 +2,16 @@
 session_start();
 include('conexion.php');
 
-$idUnidad = $_POST["idUnidad"];
+if(isset($_POST["idUnidad"])){
+    $idUnidad = $_POST["idUnidad"];
+}
+ else {
+    $idUnidad = $_SESSION["idUnidad"];
+}
+
+$usuarioId = $_SESSION["usuarioId"];
+$evaluacion = "";
+
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
@@ -13,9 +22,37 @@ $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 $unidad = mysql_fetch_array($resultadoUnidades);
 
+$aciertos = 0;
+$fallos = 0;
+$blancos = 0;
 if (isset($_POST["resultados"])){
+    //Recogemos el String con los resultados
     $resultadosString = $_POST["resultados"];
+    
+    //Lo transformamos a array y buscamos los aciertos,fallos y blancos
     $resultados = explode(",", $resultadosString);
+    foreach ($resultados as $value){
+        if($value == "acierto"){
+            $aciertos++;
+        }
+        elseif($value == "fallo"){
+            $fallos++;
+        }
+        else{
+            $blancos++;
+        }
+    }
+    
+    //Recogemos el resto de variables
+    $numero = $_POST["testNumero"];
+    $usuarioId = $_SESSION["usuarioId"];
+    
+    
+    $consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_unidades,id_usuario) VALUES('".$numero."','".$aciertos."','".$fallos."','".$blancos."','".$idUnidad."','".$usuarioId."')";
+    if(mysql_query($consultaResultados)){
+        $_SESSION["idUnidad"] = $idUnidad;
+        echo "<script>window.location.href='test.php'</script>";
+    }
 }
 
 ?>
@@ -34,9 +71,12 @@ if (isset($_POST["resultados"])){
 </head>
 <body>
 	<main>
-            <header></header>
+            <header>
+                <?php echo $_SESSION["usuarioNombre"];?>
+                <a href="index.php">Cerrar sesión</a>
+            </header>
             <?php
-            if(!isset($_POST["test"])){
+            if(!isset($_POST["test"])){               
             ?>
             <section>
                 <h1>Test</h1>
@@ -54,18 +94,41 @@ if (isset($_POST["resultados"])){
                         <tbody>
                 <?php
                 $numTest = 0;
+                $totalPreguntas = $num;
+                $necesario = 0;
                 for ($i = 0;$i<=$num;$i++){
                     if ($i % 50 == 0){
+                        if($totalPreguntas-50 > 0){
+                            $totalPreguntas = $totalPreguntas-50;
+                            $numeroPreguntas = 50;
+                        }
+                        else{
+                            $numeroPreguntas = $totalPreguntas;
+                        }
+                         
                         ++$numTest;
                 ?>
                         <tr>
                 <form method="POST">
                     <input type="hidden" name="idUnidad" value="<?php echo $idUnidad;?>"/>
-                    <input type="hidden" name="testNumero" value="<?php echo $i;?>"/>
+                    <input type="hidden" name="testNumero" value="<?php echo $numTest;?>"/>
+                    <input type="hidden" name="puntero" value="<?php echo $i;?>" />
                     <td>Test <?php echo $numTest?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <?php
+                    $consultaTest = "SELECT * FROM test WHERE id_unidades = '".$idUnidad."' AND id_usuario = '".$usuarioId."' AND numero = '".$numTest."' ORDER BY id DESC LIMIT 1";
+                    $resultadoTest = mysql_query($consultaTest);
+                    $test = mysql_fetch_array($resultadoTest);
+                    $necesario = round(($numeroPreguntas * 80) / 100);
+                    if ($test["aciertos"] >= $necesario){
+                        $evaluacion = "APTO";
+                    }
+                    else {
+                        $evaluacion = "NO APTO";
+                    }
+                    ?>
+                    <td><?php echo $evaluacion;?></td>
+                    <td><?php echo $test["aciertos"];?></td>
+                    <td><?php echo $test["fallos"];?></td>
                     <td><input type="submit" name="test" value="Entrar" class="btn btn-success btn-xs"></td>
                 </form>
 
@@ -90,6 +153,8 @@ if (isset($_POST["resultados"])){
                         
                         <div class="carousel-inner">
                 <?php
+                $testNumero = $_POST["testNumero"];
+                $puntero = $_POST["puntero"];
                 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id ASC";
                 $resultado = mysql_query($consultaPreguntas);
                 
@@ -97,7 +162,7 @@ if (isset($_POST["resultados"])){
                 $resultadoUltimo  = mysql_query($consultaUltimo);
                 $ultimo = mysql_fetch_array($resultadoUltimo);
 
-                mysql_data_seek($resultado, $_POST["testNumero"]);
+                mysql_data_seek($resultado, $puntero);
                 
                 $i = 0;
                 while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
@@ -120,6 +185,7 @@ if (isset($_POST["resultados"])){
                                         if($i == 50 || ($preguntas["id"] == $ultimo["id"])){
                                             echo "<form method='POST'>";
                                             echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
+                                            echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
                                             echo "<input type='hidden' name='resultados' id='resultados'/>";
                                             echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
                                             echo "</form>";
