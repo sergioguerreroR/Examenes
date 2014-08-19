@@ -53,7 +53,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 <article id="articleubicacion">
                     <?php
                     echo '<span id="ubica">'.$unidad['nombre'].'</span>';
-                    ?>cal
+                    ?>
                 </article>
             </footer>
 	</main>
