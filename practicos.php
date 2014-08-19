@@ -12,7 +12,7 @@ if(isset($_POST["idUnidad"])){
 $usuarioId = $_SESSION["usuarioId"];
 $evaluacion = "";
 
-$consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
+$consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 'p'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
 
@@ -21,39 +21,6 @@ $num = mysql_num_rows($enumeracion);
 $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 $unidad = mysql_fetch_array($resultadoUnidades);
-
-$aciertos = 0;
-$fallos = 0;
-$blancos = 0;
-if (isset($_POST["resultados"])){
-    //Recogemos el String con los resultados
-    $resultadosString = $_POST["resultados"];
-    
-    //Lo transformamos a array y buscamos los aciertos,fallos y blancos
-    $resultados = explode(",", $resultadosString);
-    foreach ($resultados as $value){
-        if($value == "acierto"){
-            $aciertos++;
-        }
-        elseif($value == "fallo"){
-            $fallos++;
-        }
-        else{
-            $blancos++;
-        }
-    }
-    
-    //Recogemos el resto de variables
-    $numero = $_POST["testNumero"];
-    $usuarioId = $_SESSION["usuarioId"];
-    
-    
-    $consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_unidades,id_usuario) VALUES('".$numero."','".$aciertos."','".$fallos."','".$blancos."','".$idUnidad."','".$usuarioId."')";
-    if(mysql_query($consultaResultados)){
-        $_SESSION["idUnidad"] = $idUnidad;
-        echo "<script>window.location.href='test.php'</script>";
-    }
-}
 
 ?>
 
@@ -114,27 +81,9 @@ if (isset($_POST["resultados"])){
                     <input type="hidden" name="testNumero" value="<?php echo $numTest;?>"/>
                     <input type="hidden" name="puntero" value="<?php echo $i;?>" />
                     <td>Test <?php echo $numTest?></td>
-                    <?php
-                    $consultaTest = "SELECT * FROM test WHERE id_unidades = '".$idUnidad."' AND id_usuario = '".$usuarioId."' AND numero = '".$numTest."' ORDER BY id DESC LIMIT 1";
-                    $resultadoTest = mysql_query($consultaTest);
-                    $test = mysql_fetch_array($resultadoTest);
-                    $evalua = mysql_num_rows($resultadoTest);
-                    $necesario = round(($numeroPreguntas * 80) / 100);
-                    if ($evalua != 0){
-                        if ($test["aciertos"] >= $necesario){
-                            $evaluacion = "APTO";
-                        }
-                        else {
-                            $evaluacion = "NO APTO";
-                        }
-                    }
-                    else{
-                        $evaluacion = "";
-                    }
-                    ?>
-                    <td><?php echo $evaluacion;?></td>
-                    <td><?php echo $test["aciertos"];?></td>
-                    <td><?php echo $test["fallos"];?></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td><input type="submit" name="test" value="Entrar" class="btn btn-success btn-xs"></td>
                 </form>
 
@@ -161,10 +110,10 @@ if (isset($_POST["resultados"])){
                 <?php
                 $testNumero = $_POST["testNumero"];
                 $puntero = $_POST["puntero"];
-                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't' ORDER BY id ASC";
+                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id ASC";
                 $resultado = mysql_query($consultaPreguntas);
                 
-                $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't' ORDER BY id DESC LIMIT 1";
+                $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id DESC LIMIT 1";
                 $resultadoUltimo  = mysql_query($consultaUltimo);
                 $ultimo = mysql_fetch_array($resultadoUltimo);
 
@@ -216,7 +165,7 @@ if (isset($_POST["resultados"])){
             ?>
             <footer>
                 <article id="articleboton">
-                <a href="unidad.php"><img src="imagenes/anterior.png" /></a>
+                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php
