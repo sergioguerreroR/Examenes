@@ -144,7 +144,7 @@ if (isset($_POST["resultados"])){
             ?>
             <footer>
                 <article id="articleboton">
-                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
+                <a href="unidad.php"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php

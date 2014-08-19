@@ -36,7 +36,6 @@ include('conexion.php');
                 </section>
             <footer>
                 <article id="articleboton">
-                <a href="index.php"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <span id="ubica">Panel de cursos</span>
