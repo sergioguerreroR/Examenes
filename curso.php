@@ -28,7 +28,10 @@ $curso = mysql_fetch_array($resultadocurso);
 </head>
 <body>
 	<main>
-            <header></header>
+            <header>
+                <?php echo $_SESSION["usuarioNombre"];?>
+                <a href="index.php">Cerrar sesión</a>
+            </header>
             <section>
                 <h1>Temas</h1>
                 <article id="articlecurso">
