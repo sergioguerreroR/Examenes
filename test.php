@@ -2,29 +2,32 @@
 session_start();
 include('conexion.php');
 
+//Recogida de datos necesarios para poder actualizar la pagina
 if(isset($_POST["idUnidad"])){
     $idUnidad = $_POST["idUnidad"];
 }
  else {
     $idUnidad = $_SESSION["idUnidad"];
 }
-
 $usuarioId = $_SESSION["usuarioId"];
 $evaluacion = "";
 
+//Preguntas tipo test según unidad
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
 
-
-
+//Seleccionamos unidad actual
 $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 $unidad = mysql_fetch_array($resultadoUnidades);
 
+//Inicializamos variables necesarias
 $aciertos = 0;
 $fallos = 0;
 $blancos = 0;
+
+//Recogida de resultados
 if (isset($_POST["resultados"])){
     //Recogemos el String con los resultados
     $resultadosString = $_POST["resultados"];
@@ -47,8 +50,9 @@ if (isset($_POST["resultados"])){
     $numero = $_POST["testNumero"];
     $usuarioId = $_SESSION["usuarioId"];
     
-    
+    //Hacemos el insert del resultado del test
     $consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_unidades,id_usuario) VALUES('".$numero."','".$aciertos."','".$fallos."','".$blancos."','".$idUnidad."','".$usuarioId."')";
+    //Si se hace la consulta, entramos a la pagina de nuevo y enviamos la unidad por variable de sesión
     if(mysql_query($consultaResultados)){
         $_SESSION["idUnidad"] = $idUnidad;
         echo "<script>window.location.href='test.php'</script>";
@@ -76,6 +80,7 @@ if (isset($_POST["resultados"])){
                 <a href="index.php">Cerrar sesión</a>
             </header>
             <?php
+            //Se ejecutará este código si no estamos haciendo un test
             if(!isset($_POST["test"])){               
             ?>
             <section>
@@ -93,9 +98,11 @@ if (isset($_POST["resultados"])){
                         </thead>
                         <tbody>
                 <?php
+                //Variables para control de preguntas y resultados
                 $numTest = 0;
                 $totalPreguntas = $num;
                 $necesario = 0;
+                //Bucle que dividirá los test cada 50 preguntas
                 for ($i = 0;$i<=$num;$i++){
                     if ($i % 50 == 0){
                         if($totalPreguntas-50 > 0){
@@ -115,6 +122,7 @@ if (isset($_POST["resultados"])){
                     <input type="hidden" name="puntero" value="<?php echo $i;?>" />
                     <td>Test <?php echo $numTest?></td>
                     <?php
+                    //Mostramos resultados si existen
                     $consultaTest = "SELECT * FROM test WHERE id_unidades = '".$idUnidad."' AND id_usuario = '".$usuarioId."' AND numero = '".$numTest."' ORDER BY id DESC LIMIT 1";
                     $resultadoTest = mysql_query($consultaTest);
                     $test = mysql_fetch_array($resultadoTest);
@@ -167,7 +175,8 @@ if (isset($_POST["resultados"])){
                 $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't' ORDER BY id DESC LIMIT 1";
                 $resultadoUltimo  = mysql_query($consultaUltimo);
                 $ultimo = mysql_fetch_array($resultadoUltimo);
-
+                
+                //Colocamos el puntero en el resultado indicado en el número de test
                 mysql_data_seek($resultado, $puntero);
                 
                 $i = 0;
@@ -216,7 +225,7 @@ if (isset($_POST["resultados"])){
             ?>
             <footer>
                 <article id="articleboton">
-                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
+                <a href="unidad.php?id=<?php echo $unidad["id"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php

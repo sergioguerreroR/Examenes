@@ -2,22 +2,22 @@
 session_start();
 include('conexion.php');
 
+//Recogida de datos necearios para actualizar la pagina
 if(isset($_POST["idUnidad"])){
     $idUnidad = $_POST["idUnidad"];
 }
  else {
     $idUnidad = $_SESSION["idUnidad"];
 }
-
 $usuarioId = $_SESSION["usuarioId"];
 $evaluacion = "";
 
+//Consulta preguntar de casos practicos según unidad
 $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 'p'";
 $enumeracion = mysql_query($consultaPreguntas);
 $num = mysql_num_rows($enumeracion);
 
-
-
+//Consulta unidad actual
 $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);
 $unidad = mysql_fetch_array($resultadoUnidades);
@@ -42,82 +42,17 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 <?php echo $_SESSION["usuarioNombre"];?>
                 <a href="index.php">Cerrar sesión</a>
             </header>
-            <?php
-            if(!isset($_POST["test"])){               
-            ?>
-            <section>
-                <h1>Test</h1>
-                <article id="articleTest">
-                    <table id="tablatest" class="table table-condensed">
-                        <thead>
-                        <tr>
-                        <th>Tema</th>
-                        <th>Evaluación</th>
-                        <th>Aciertos</th>
-                        <th>Errores</th>
-                        <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                <?php
-                $numTest = 0;
-                $totalPreguntas = $num;
-                $necesario = 0;
-                for ($i = 0;$i<=$num;$i++){
-                    if ($i % 50 == 0){
-                        if($totalPreguntas-50 > 0){
-                            $totalPreguntas = $totalPreguntas-50;
-                            $numeroPreguntas = 50;
-                        }
-                        else{
-                            $numeroPreguntas = $totalPreguntas;
-                        }
-                         
-                        ++$numTest;
-                ?>
-                        <tr>
-                <form method="POST">
-                    <input type="hidden" name="idUnidad" value="<?php echo $idUnidad;?>"/>
-                    <input type="hidden" name="testNumero" value="<?php echo $numTest;?>"/>
-                    <input type="hidden" name="puntero" value="<?php echo $i;?>" />
-                    <td>Test <?php echo $numTest?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><input type="submit" name="test" value="Entrar" class="btn btn-success btn-xs"></td>
-                </form>
-
-                <?php
-                    }
-                                       echo '</tr>';
-                    
-                  
-
-                }
-                ?>
-                        </tbody>
-                        </table>
-                </article>
-            </section>
-            <?php
-            }
-            else{
-            ?>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
                         
                         <div class="carousel-inner">
                 <?php
-                $testNumero = $_POST["testNumero"];
-                $puntero = $_POST["puntero"];
-                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id ASC";
+                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo='p' ORDER BY id ASC";
                 $resultado = mysql_query($consultaPreguntas);
                 
-                $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' ORDER BY id DESC LIMIT 1";
+                $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo='p' ORDER BY id DESC LIMIT 1";
                 $resultadoUltimo  = mysql_query($consultaUltimo);
                 $ultimo = mysql_fetch_array($resultadoUltimo);
-
-                mysql_data_seek($resultado, $puntero);
                 
                 $i = 0;
                 while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
@@ -127,12 +62,9 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
                                     <h3><?php echo $preguntas['pregunta'];?></h3>
-                                    <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta1']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta3']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta4']; ?></button></p>
-                                    <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $preguntas['explicacion']; ?></p>
+                                    <p><input type="button" onclick="casosPracticos('respuesta_correcta<?php echo $i;?>');casosPracticos('explicacion<?php echo $i;?>');" value="Resolver"></p>
+                                    <p id="respuesta_correcta<?php echo $i;?>" style="display: none;"><?php echo $preguntas['respuesta_correcta']; ?></p>
+                                    <p id="explicacion<?php echo $i;?>" style="display: none;"><?php if (!empty($preguntas['explicacion'])){echo "Explicación: ".$preguntas['explicacion'];}?></p>
                                     <p>
                                         <?php 
                                         
@@ -160,12 +92,9 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                         
                     </div>
             </section>
-            <?php
-            }
-            ?>
             <footer>
                 <article id="articleboton">
-                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
+                <a href="unidad.php?id=<?php echo $unidad["id"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php

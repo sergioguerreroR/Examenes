@@ -38,10 +38,7 @@ if (isset($_POST["iniciar"])) {
 </head>
 <body>
 	<main>
-            <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
-            </header>
+            <header></header>
             <section id="sectionindex">
             <form method="POST">
                 <article id="login">

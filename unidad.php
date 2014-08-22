@@ -2,7 +2,12 @@
 session_start();
 include('conexion.php');
 
-$idUnidad = $_POST["id"];
+if(isset($_POST["id"])){
+    $idUnidad = $_POST["id"];
+}
+else{
+    $idUnidad = $_GET["id"];
+}
 
 $consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
 $resultadoUnidades = mysql_query($consultaUnidades);

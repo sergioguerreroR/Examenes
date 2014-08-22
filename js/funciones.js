@@ -5,6 +5,7 @@
  */
 var array = new Array();
 
+//Funcion que valida las respuestas elegidas y las marca como aciertos, fallos o en blanco
 function valida(respuesta,numero){
     var respuestas = document.getElementsByClassName("pregunta"+numero);
     var i = respuestas.length;
@@ -31,12 +32,20 @@ function valida(respuesta,numero){
     
 }
 
+//Almacenamos las respuestas en arrays
 function resultados(numero,resultado){
     
     array[numero-1] = resultado;
     
 }
 
+//Devolvemos el array
 function arrayResultados(){
     document.getElementById("resultados").value = window.array.toString();
+}
+
+//Casos practicos, mostrar respuestas y explicacion
+function casosPracticos(elementos){
+    document.getElementById(elementos).style.display = 'block';
+    
 }
