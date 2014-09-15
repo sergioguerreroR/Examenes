@@ -3,15 +3,11 @@ session_start();
 include('conexion.php');
 
 if(isset($_POST["id"])){
-    $idUnidad = $_POST["id"];
+    $idCurso = $_POST["id"];
 }
 else{
-    $idUnidad = $_GET["id"];
+    $idCurso = $_GET["id"];
 }
-
-$consultaUnidades = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
-$resultadoUnidades = mysql_query($consultaUnidades);
-$unidad = mysql_fetch_array($resultadoUnidades);
 
 ?>
 <!DOCTYPE html>
@@ -33,32 +29,27 @@ $unidad = mysql_fetch_array($resultadoUnidades);
             </header>
             <section id="sectionunidad">
                 <article id="botonprogramados" class="articleunidad">
-            <form method="POST" action="test.php">
-                <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
+            <form method="POST" action="curso.php">
+                <input type="hidden" name="id" value="<?php echo $idCurso; ?>" />
                 <button id="botontestprogramados" type="submit" value="Test Programados" />                
             </form>
                 </article>
                 <article id="botonexamenes" class="articleunidad">
             <form method="POST" action="examen.php">
-                <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
+                <input type="hidden" name="id" value="<?php echo $idCurso; ?>" />
                 <button id="botontestexamenes" type="submit" value="Test Programados" />                
             </form>
                 </article>
                 <article class="articleunidad">
-            <form method="POST" action="practicos.php">
-                <input type="hidden" name="idUnidad" value="<?php echo $idUnidad; ?>" />
+            <form method="POST" action="cursoPracticos.php">
+                <input type="hidden" name="id" value="<?php echo $idCurso; ?>" />
                 <button id="botoncasospracticos" type="submit" value="Test Programados" />                
             </form>
                 </article>
             </section>
             <footer>
                 <article id="articleboton">
-                <a href="curso.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
-                </article>
-                <article id="articleubicacion">
-                    <?php
-                    echo '<span id="ubica">'.$unidad['nombre'].'</span>';
-                    ?>
+                <a href="panel.php"><img src="imagenes/anterior.png" /></a>
                 </article>
             </footer>
 	</main>

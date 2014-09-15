@@ -2,22 +2,15 @@
 session_start();
 include('conexion.php');
 
-if(isset($_POST["idUnidad"])){
-    $idUnidad = $_POST["idUnidad"];
-}
- else {
-    $idUnidad = $_SESSION["idUnidad"];
+if(isset($_POST["id"])){
+    $idCurso = $_POST["id"];
 }
 
 $usuarioId = $_SESSION["usuarioId"];
 $evaluacion = "";
 
 
-$consultaUnidad = "SELECT * FROM unidades WHERE id='" .$idUnidad. "'";
-$resultadoUnidad = mysql_query($consultaUnidad);
-$unidad = mysql_fetch_array($resultadoUnidad);
-
-$consultaCurso = "SELECT * FROM cursos WHERE id = '".$unidad["id_cursos"]."'";
+$consultaCurso = "SELECT * FROM cursos WHERE id = '".$idCurso."'";
 $resultadoCurso = mysql_query($consultaCurso);
 $curso = mysql_fetch_array($resultadoCurso);
 
@@ -90,15 +83,21 @@ if (isset($_POST["resultados"])){
                 //Cantidad de preguntas totales,lo usaremos para calcular el porcentaje que corresponde a cada tema
                 $num = mysql_num_rows($resultadoTotal);
                 
-                $consultaPreguntas = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't' ORDER BY id ASC";
-                $resultado = mysql_query($consultaPreguntas);
-                
-                $consultaUltimo = "SELECT * FROM preguntas WHERE id_unidades = '".$idUnidad."' AND tipo = 't' ORDER BY id DESC LIMIT 1";
-                $resultadoUltimo  = mysql_query($consultaUltimo);
-                $ultimo = mysql_fetch_array($resultadoUltimo);
-                
+                $consultaUnidades = "SELECT * FROM unidades WHERE id_cursos = '".$curso["id"]."'";
+                $resultadoUnidades = mysql_query($consultaUnidades);
+                while ($unidades = mysql_fetch_array($resultadoUnidades)){
+                    $preguntaUnidades = "SELECT * FROM preguntas WHERE id_unidades = '".$unidades["id"]."' AND tipo = 't'";
+                    $resultadopreguntaUnidades = mysql_query($preguntaUnidades);
+                    $numPreguntas[] = mysql_num_rows($resultadopreguntaUnidades);
+                }
+                echo $num;
+                foreach ($numPreguntas as $value) {
+                    echo "Tema 1: ".$value."<br>";
+                }
+    
+
                 $i = 0;
-                while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
+                /*while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
                     $i++;
                     
                 ?>
@@ -132,7 +131,7 @@ if (isset($_POST["resultados"])){
                             </div>
                 <?php
                     
-                }
+                }*/
                 ?>
                         </div>
                         
@@ -140,11 +139,11 @@ if (isset($_POST["resultados"])){
             </section>
             <footer>
                 <article id="articleboton">
-                <a href="unidad.php?id=<?php echo $unidad["id"]; ?>"><img src="imagenes/anterior.png" /></a>
+                <a href="unidad.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php
-                    echo '<span id="ubica">'.$unidad['nombre'].'</span>';
+                    echo '<span id="ubica">'.$curso['nombre'].'</span>';
                     ?>
                 </article>
             </footer>

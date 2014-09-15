@@ -225,7 +225,7 @@ if (isset($_POST["resultados"])){
             ?>
             <footer>
                 <article id="articleboton">
-                <a href="unidad.php?id=<?php echo $unidad["id"]; ?>"><img src="imagenes/anterior.png" /></a>
+                <a href="curso.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php

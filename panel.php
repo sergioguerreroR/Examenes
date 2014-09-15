@@ -26,7 +26,7 @@ include('conexion.php');
                 $resultado = mysql_query($consulta);
                 while ($fila = mysql_fetch_array($resultado)){
                     echo '<article id="articlepanel">';
-                    echo '<form method="POST" action="curso.php">';
+                    echo '<form method="POST" action="unidad.php">';
                     echo '<input type="hidden" name="id" value="'.$fila["id"].'" />';
                     echo '<br>';
                     echo '<button id="botontitulotranspor" type="submit"><span id="nombretitu"> '.$fila["nombre"].'</span></button>';

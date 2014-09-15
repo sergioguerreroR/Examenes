@@ -51,7 +51,7 @@ $curso = mysql_fetch_array($resultadocurso);
                     echo '<td></td>';
                     echo '<td></td>';
                     echo '<td></td>';
-                    echo '<form method="POST" action="test.php">';
+                    echo '<form method="POST" action="practicos.php">';
                     echo '<input type="hidden" name="idUnidad" value="'.$unidad["id"].'" />';
                     echo '<td><input type="submit" value="Entrar"/ class="btn btn-success btn-xs"></td>';
                     echo '</form>';

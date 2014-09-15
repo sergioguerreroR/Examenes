@@ -94,7 +94,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
             </section>
             <footer>
                 <article id="articleboton">
-                <a href="unidad.php?id=<?php echo $unidad["id"]; ?>"><img src="imagenes/anterior.png" /></a>
+                    <a href="cursoPracticos.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php
