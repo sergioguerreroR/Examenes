@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('conexion.php');
-
 //Recogida de datos necearios para actualizar la pagina
 if(isset($_POST["idUnidad"])){
     $idUnidad = $_POST["idUnidad"];
@@ -39,8 +38,8 @@ $unidad = mysql_fetch_array($resultadoUnidades);
 <body>
 	<main>
             <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
+                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p></span>
             </header>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -85,11 +84,9 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                                 </div>
                             </div>
                 <?php
-                    
                 }
                 ?>
                         </div>
-                        
                     </div>
             </section>
             <footer>
@@ -103,7 +100,6 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 </article>
             </footer>
 	</main>
-        
 <script type="text/javascript">
     $('a[data-slide="next"]').click(function() {
         $('#carousel').carousel('next');

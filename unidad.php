@@ -24,8 +24,8 @@ else{
 <body>
 	<main>
             <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
+                <span id="headerUsuarioUnidad"><p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p></span>
             </header>
             <section id="sectionunidad">
                 <article id="botonprogramados" class="articleunidad">

@@ -63,14 +63,13 @@ if (isset($_POST["resultados"])){
     <script src="js/bootstrap.js"></script>
     <script src="js/funciones.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="css/estilo.css" type="text/css" />
-    
+    <link rel="stylesheet" href="css/estilo.css" type="text/css" />    
 </head>
 <body>
 	<main>
             <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
+                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p></span>
             </header>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -94,12 +93,10 @@ if (isset($_POST["resultados"])){
                 foreach ($numPreguntas as $value) {
                     echo "Tema 1: ".$value."<br>";
                 }
-    
-
+   
                 $i = 0;
                 /*while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
-                    $i++;
-                    
+                    $i++;                 
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
@@ -134,7 +131,6 @@ if (isset($_POST["resultados"])){
                 }*/
                 ?>
                         </div>
-                        
                     </div>
             </section>
             <footer>
@@ -148,7 +144,7 @@ if (isset($_POST["resultados"])){
                 </article>
             </footer>
 	</main>
-        
+
 <script type="text/javascript">
     $('a[data-slide="next"]').click(function() {
         $('#carousel').carousel('next');

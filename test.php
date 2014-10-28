@@ -76,8 +76,9 @@ if (isset($_POST["resultados"])){
 <body>
 	<main>
             <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
+                <p class="headerUsuario"><?php echo $_SESSION["usuarioNombre"];?>
                 <a href="index.php">Cerrar sesión</a>
+                </p>
             </header>
             <?php
             //Se ejecutará este código si no estamos haciendo un test
