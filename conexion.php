@@ -2,7 +2,7 @@
 	$Usuario="root";  
         $Password="4321";
         //$Servidor="bbdd.cefocor.com";
-        $Servidor="192.168.1.100"; 
+        $Servidor="192.168.0.100"; 
         $BaseDeDatos="test";
         
 	$db = mysql_connect($Servidor,$Usuario,$Password) or die ("Error al conectar con el servidor");
