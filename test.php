@@ -186,7 +186,7 @@ if (isset($_POST["resultados"])){
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
-                                    <h3><?php echo $preguntas['pregunta'];?></h3>
+                                    <h3><?php echo $i." - ".$preguntas['pregunta'];?></h3>
                                     <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
                                     <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta1']; ?></button></p>
                                     <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p>
