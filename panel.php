@@ -15,12 +15,11 @@ include('conexion.php');
 <body>
 	<main>
             <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
+                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p></span>
             </header>
             <section>
                 <h1>Cursos Disponibles</h1>
-                
 		<?php
                 $consulta = "SELECT * FROM curso_alumno WHERE id_alumno = '".$_SESSION["usuarioId"]."'";
                 $resultado = mysql_query($consulta);
@@ -35,9 +34,7 @@ include('conexion.php');
                     echo '<button id="botontitulotranspor" type="submit"><span id="nombretitu"> '.$curso["nombre"].'</span></button>';
                     echo '</form>';
                     echo '</article>';
-                    
                 }
-                
                 ?>
                 </section>
             <footer>

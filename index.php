@@ -5,6 +5,9 @@ session_destroy();
 session_start();
 include('conexion.php');
 
+//Inicializamos la variable error
+$error=0;
+
 if (isset($_POST["iniciar"])) {
     $email = $_POST["email"];
     $pass = $_POST["pass"];
@@ -19,11 +22,9 @@ if (isset($_POST["iniciar"])) {
         echo "<script>window.location.href='panel.php'</script>";
     }
     else{
-        echo '<script>alert("No existe el usuario");</script>';
-    }
-    
+       $error=1;  
+    }   
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,6 +50,11 @@ if (isset($_POST["iniciar"])) {
                     <img src="imagenes/contra.png" />
                     <input type="password" name="pass" placeholder="Contraseña"/>
                 </article>
+                <?php
+                    if($error==1){
+                        echo '<p id="colorError">Usuario o contraseña no válidos.</p>';
+                    }
+                ?>
                 <article id="btnentrar">
                     <input type="submit" name="iniciar" value="Entrar" class="btn btn-primary btn-lg">
                 </article>

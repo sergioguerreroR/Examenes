@@ -6,12 +6,11 @@
 @font-face{
 	font-family: nombretabla;
 	src: url('fuentes/Comfortaa_Regular.ttf');
-}
-@font-face{
+    }
+    @font-face{
 	font-family: nombreboton;
 	src: url('fuentes/Aclonica.ttf');
 }
-
 
 /*CABECERA*/
 h1{
@@ -44,6 +43,7 @@ main{
         margin-bottom: 20px;
         border-radius: 20px;
         box-shadow: 0px 0px 2px 2px;
+        
 
 }
 
@@ -84,6 +84,7 @@ article{
 width: 90%;
 margin-left: 5%;
 text-align: left;
+margin-top: 40px;
 }
 
 #articleTest{
@@ -104,8 +105,6 @@ text-align: left;
 
 }
 
-
-
 #articleubicacion{
     width: 49%;
     text-align: right;
@@ -125,7 +124,6 @@ text-align: left;
 }
 
 /**/
-
 #btnentrar{
     margin-top: 60px;
     width: 100%;
@@ -149,11 +147,11 @@ td{
 
 /*botones*/
 #botontestexamenes{
-    min-height: 210px;
-    min-width: 247px;
+    min-height: 300px;
+    min-width: 180px;
     background-color: transparent;
     border: 0;
-    background-image: url('../imagenes/test_examen.png');
+    background-image: url('../imagenes/examen2.png');
     transition: width 0.5s, height 0.5s, transform 0.5s; 
 }
 
@@ -165,13 +163,12 @@ td{
     transition: width 0.5s, height 0.5s, transform 0.5s; 
 }
 
-
 #botoncasospracticos{
-    min-height: 210px;
-    min-width: 247px;
+    min-height: 300px;
+    min-width: 180px;
     background-color: transparent;
     border: 0;
-    background-image: url('../imagenes/casos_practicos.png');
+    background-image: url('../imagenes/practicos2.png');
     transition: width 0.5s, height 0.5s, transform 0.5s; 
 }
 
@@ -183,15 +180,12 @@ td{
     transition: width 0.5s, height 0.5s, transform 0.5s; 
 }
 
-
-
-
 #botontestprogramados{
-    min-height: 210px;
-    min-width: 247px;
+    min-height: 300px;
+    min-width: 170px;
     background-color: transparent;
     border: 0;
-    background-image: url('../imagenes/test_programados.png');
+    background-image: url('../imagenes/programados2.png');
     transition: width 0.5s, height 0.5s, transform 0.5s;   
 
 }
@@ -222,14 +216,41 @@ td{
 #botontitulotranspor:hover{
     transform: scale(1.05,1.05);
     -moz-transform: scale(1.05,1.05);
-    -webkit-transform: scale(1.05,1.05);
+    -webkit-transform: scale(1.05,1.05);    
     -ms-transform: scale(1.05,1.05);
     transition: width 0.5s, height 0.5s, transform 0.5s;
 }
 
-
-
 /*Tablatemas*/
 table{
     position: relative;
+}
+
+/*Color parrafo de error en index*/
+#colorError{
+    color: red;
+    font-weight: bold;
+    font-family: Arial;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+
+.headerUsuario{
+    float: right;
+    margin-right: 30px;
+    margin-top: 30px;
+    font-size: 15px;
+    font-family: comic sans ms;
+    text-align: center;
+}
+
+#headerUsuarioUnidad{
+    float: right;
+    margin-right: 20px;
+    margin-top: 30px;
+    font-size: 15px;
+    font-family: comic sans ms;
+    text-align: center;
+
 }

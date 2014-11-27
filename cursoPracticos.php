@@ -29,8 +29,8 @@ $curso = mysql_fetch_array($resultadocurso);
 <body>
 	<main>
             <header>
-                <?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
+                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p></span>
             </header>
             <section>
                 <h1>Temas</h1>
