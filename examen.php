@@ -68,8 +68,13 @@ if (isset($_POST["resultados"])){
 <body>
 	<main>
             <header>
-                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
-                    <p><a href="index.php">Cerrar sesión</a></p></span>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+                <div id="nombreUsuarioRegistrado">
+                    <p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p>
+                </div>
             </header>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">

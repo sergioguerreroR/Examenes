@@ -28,9 +28,14 @@ $curso = mysql_fetch_array($resultadocurso);
 </head>
 <body>
 	<main>
-            <header>
-                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
-                    <p><a href="index.php">Cerrar sesión</a></p></span>
+                 <header>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+                <div id="nombreUsuarioRegistrado">
+                    <p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p>
+                </div>
             </header>
             <section>
                 <h1>Temas</h1>
@@ -58,7 +63,7 @@ $curso = mysql_fetch_array($resultadocurso);
                     echo'</tr>';
                 }
                 ?>
-                            </tbody>
+                        </tbody>
                 </table>
                 </article>
                 </section>

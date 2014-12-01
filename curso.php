@@ -28,10 +28,15 @@ $curso = mysql_fetch_array($resultadocurso);
 </head>
 <body>
 	<main>
-            <span class="headerUsuario">
-                <p><?php echo $_SESSION["usuarioNombre"];?></p>
-                 <p><a href="index.php">Cerrar sesión</a></p>
-            </span>
+             <header>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+                <div id="nombreUsuarioRegistrado">
+                    <p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p>
+                </div>
+            </header>
             <section>
                 <article id="articlecurso">
                     <table id="tablatemas" class="table table-condensed">

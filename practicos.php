@@ -37,9 +37,14 @@ $unidad = mysql_fetch_array($resultadoUnidades);
 </head>
 <body>
 	<main>
-            <header>
-                <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
-                    <p><a href="index.php">Cerrar sesión</a></p></span>
+                <header>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+                <div id="nombreUsuarioRegistrado">
+                    <p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p>
+                </div>
             </header>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -60,10 +65,12 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
-                                    <h3><?php echo $preguntas['pregunta'];?></h3>
-                                    <p><input type="button" onclick="casosPracticos('respuesta_correcta<?php echo $i;?>');casosPracticos('explicacion<?php echo $i;?>');" value="Resolver"></p>
-                                    <p id="respuesta_correcta<?php echo $i;?>" style="display: none;"><?php echo $preguntas['respuesta_correcta']; ?></p>
+                                    <h3 id="practicos"><?php echo $preguntas['pregunta'];?></h3>
+                                    <p><input id="resolver" class="btn btn-success btn-default" type="button" onclick="casosPracticos('respuesta_correcta<?php echo $i;?>');casosPracticos('explicacion<?php echo $i;?>');" value="Resolver"></p>
+                                    <div class="respuestaCorrectaPracticos">
+                                    <p  id="respuesta_correcta<?php echo $i;?>" style="display: none;"><?php echo $preguntas['respuesta_correcta']; ?></p>
                                     <p id="explicacion<?php echo $i;?>" style="display: none;"><?php if (!empty($preguntas['explicacion'])){echo "Explicación: ".$preguntas['explicacion'];}?></p>
+                                    </div>
                                     <p>
                                         <?php 
                                         
@@ -77,7 +84,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                                             echo "</form>";
                                         }
                                         else{
-                                            echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>';
+                                            echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button id="resolver" class="btn btn-primary btn-default">Siguiente</button></a>';
                                         }
                                         ?>
                                     </p>

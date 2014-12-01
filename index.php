@@ -39,7 +39,11 @@ if (isset($_POST["iniciar"])) {
 </head>
 <body>
 	<main>
-            <header></header>
+             <header>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+            </header>
             <section id="sectionindex">
             <form method="POST">
                 <article id="login">

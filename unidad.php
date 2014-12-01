@@ -23,9 +23,14 @@ else{
 </head>
 <body>
 	<main>
-            <header>
-                <span id="headerUsuarioUnidad"><p><?php echo $_SESSION["usuarioNombre"];?></p>
-                    <p><a href="index.php">Cerrar sesión</a></p></span>
+             <header>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+                <div id="nombreUsuarioRegistrado">
+                   <?php echo $_SESSION["usuarioNombre"];?>
+                   <a href="index.php">Cerrar sesión</a>
+                </div>
             </header>
             <section id="sectionunidad">
                 <article id="botonprogramados" class="articleunidad">

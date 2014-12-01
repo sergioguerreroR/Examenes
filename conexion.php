@@ -5,8 +5,8 @@
         $Servidor="192.168.0.100"; 
         $BaseDeDatos="test";
         
-	$db = mysql_connect($Servidor,$Usuario,$Password) or die ("Error al conectar con el servidor");
-	mysql_select_db($BaseDeDatos)or die("Error al conectar con la base de datos"); 
+	$db = mysql_connect($Servidor,$Usuario,$Password) or die ("Error al conectar con el servidor.");
+	mysql_select_db($BaseDeDatos)or die("Error al conectar con la base de datos."); 
 	
 	mysql_query("SET NAMES 'UTF8'");
 ?>

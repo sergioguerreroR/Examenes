@@ -75,10 +75,14 @@ if (isset($_POST["resultados"])){
 </head>
 <body>
 	<main>
-            <header>
-                <p class="headerUsuario"><?php echo $_SESSION["usuarioNombre"];?>
-                <a href="index.php">Cerrar sesión</a>
-                </p>
+             <header>
+                <div id="caraDali">
+                    <img id="caraImagen" src="imagenes/cabeceraCDP.png">
+                </div>
+                <div id="nombreUsuarioRegistrado">
+                    <p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p>
+                </div>
             </header>
             <?php
             //Se ejecutará este código si no estamos haciendo un test
