@@ -43,7 +43,7 @@ $curso = mysql_fetch_array($resultadocurso);
                         <thead>
                         <tr>
                         <th>Tema</th>
-                        <th>Evaluación</th>
+                        <th></th>
                         <th></th>
                         </tr>
                         </thead>

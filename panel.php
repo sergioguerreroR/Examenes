@@ -26,14 +26,17 @@ include('conexion.php');
             <section>
                 <h1>Cursos Disponibles</h1>
 		<?php
-                $consulta = "SELECT * FROM cursos";
+                $consulta = "SELECT * FROM curso_alumno WHERE id_alumno = '".$_SESSION["usuarioId"]."'";
                 $resultado = mysql_query($consulta);
                 while ($fila = mysql_fetch_array($resultado)){
+                    $consultaCurso = "SELECT * FROM cursos WHERE id = '".$fila["id_curso"]."'";
+                    $resultadoCurso = mysql_query($consultaCurso);
+                    $curso = mysql_fetch_array($resultadoCurso);
                     echo '<article id="articlepanel">';
                     echo '<form method="POST" action="unidad.php">';
-                    echo '<input type="hidden" name="id" value="'.$fila["id"].'" />';
+                    echo '<input type="hidden" name="id" value="'.$curso["id"].'" />';
                     echo '<br>';
-                    echo '<button id="botontitulotranspor" type="submit"><span id="nombretitu"> '.$fila["nombre"].'</span></button>';
+                    echo '<button id="botontitulotranspor" type="submit"><span id="nombretitu"> '.$curso["nombre"].'</span></button>';
                     echo '</form>';
                     echo '</article>';
                 }

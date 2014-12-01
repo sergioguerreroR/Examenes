@@ -76,6 +76,30 @@ if (isset($_POST["resultados"])){
                     <p><a href="index.php">Cerrar sesión</a></p>
                 </div>
             </header>
+            <?php
+            //Se ejecutará este código si no estamos haciendo el examen
+            if(!isset($_POST["test"])){
+                $consultaAlumnoExamen = "SELECT * FROM examen WHERE id_alumno = '".$_SESSION["usuarioId"]."'";
+                $resultadoAlumnoExamen = mysql_query($consultaAlumnoExamen);
+                $cant = mysql_num_rows($resultadoAlumnoExamen);
+                if ($cant == 0){
+                    echo "<h2>Aún no has realizado ningún examen</h2>";
+                }
+                else{
+                    //Preguntar a jose el mínimo para aprobar
+                }
+            ?>
+            
+            
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $idCurso;?>">
+                <input type="submit" name="test" value="Empezar examen">
+            </form>
+            
+            <?php
+            }
+            else{
+            ?>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
                         
@@ -89,55 +113,66 @@ if (isset($_POST["resultados"])){
                 
                 $consultaUnidades = "SELECT * FROM unidades WHERE id_cursos = '".$curso["id"]."'";
                 $resultadoUnidades = mysql_query($consultaUnidades);
+                $i = 0;
                 while ($unidades = mysql_fetch_array($resultadoUnidades)){
                     $preguntaUnidades = "SELECT * FROM preguntas WHERE id_unidades = '".$unidades["id"]."' AND tipo = 't'";
                     $resultadopreguntaUnidades = mysql_query($preguntaUnidades);
-                    $numPreguntas[] = mysql_num_rows($resultadopreguntaUnidades);
-                }
-                echo $num;
-                foreach ($numPreguntas as $value) {
-                    echo "Tema 1: ".$value."<br>";
-                }
-   
-                $i = 0;
-                /*while (($preguntas = mysql_fetch_assoc($resultado)) && ($i<50)){
-                    $i++;                 
+                    
+                    //Número de preguntas que tiene cada unidad
+                    $numPreguntas = mysql_num_rows($resultadopreguntaUnidades);
+                    
+                    //Número de preguntas que apaeceran en el examen
+                    $numExamen = round(($numPreguntas/$num)*100);
+                    
+                    //Consulta para imprimir preguntas segun el numero que tiene que aparecer en el examen
+                    $consultaExamen = "SELECT * FROM preguntas WHERE id_unidades = '".$unidades["id"]."' AND tipo = 't' ORDER BY RAND() LIMIT $numExamen";
+                    $resultadoExamen = mysql_query($consultaExamen);
+                    
+                    while (($examen = mysql_fetch_assoc($resultadoExamen)) && ($i<100)){
+                    $i++;
+                    
                 ?>
-                            <div class="item<?php if($i <= 1){echo " active"; }?>">
-                                <div class="finlay-carousel-caption">
-                                    <h3><?php echo $preguntas['pregunta'];?></h3>
-                                    <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta1']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta3']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta4']; ?></button></p>
-                                    <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $preguntas['explicacion']; ?></p>
-                                    <p>
-                                        <?php 
-                                        
-                                        //echo $preguntas["id"][0];
-                                        if($i == 50 || ($preguntas["id"] == $ultimo["id"])){
-                                            echo "<form method='POST'>";
-                                            echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
-                                            echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
-                                            echo "<input type='hidden' name='resultados' id='resultados'/>";
-                                            echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
-                                            echo "</form>";
-                                        }
-                                        else{
-                                            echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>';
-                                        }
-                                        ?>
-                                    </p>
-                                </div>
-                            </div>
+                    <div class="item<?php if($i <= 1){echo " active"; }?>">
+                        <div class="finlay-carousel-caption">
+                            <h3><?php echo $i." - ".$examen['pregunta'];?></h3>
+                            <input type="hidden" value="<?php echo $examen['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
+                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta1']; ?></button></p>
+                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta2']; ?></button></p>
+                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta3']; ?></button></p>
+                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta4']; ?></button></p>
+                            <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $examen['explicacion']; ?></p>
+                            <p>
+                                <?php 
+
+                                //echo $preguntas["id"][0];
+                                if($i == 100){
+                                    echo "<form method='POST'>";
+                                    echo "<input type='hidden' name='idCurso' value='$idCurso'/>";
+                                    echo "<input type='hidden' name='resultados' id='resultados'/>";
+                                    echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
+                                    echo "</form>";
+                                }
+                                else{
+                                    echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>';
+                                }
+                                ?>
+                            </p>
+                        </div>
+                    </div>
                 <?php
                     
-                }*/
+                }
+                }
+    
+
+                
                 ?>
                         </div>
                     </div>
             </section>
+            <?php
+            }
+            ?>
             <footer>
                 <article id="articleboton">
                 <a href="unidad.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
