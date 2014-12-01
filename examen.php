@@ -45,7 +45,7 @@ if (isset($_POST["resultados"])){
     $usuarioId = $_SESSION["usuarioId"];
     
     
-    $consultaResultados = "INSERT into test(numero,aciertos,fallos,blancos,id_unidades,id_usuario) VALUES('".$numero."','".$aciertos."','".$fallos."','".$blancos."','".$idUnidad."','".$usuarioId."')";
+    $consultaResultados = "INSERT into examen(id_curso,id_usuario,aciertos,fallos,blancos) VALUES('".$idCurso."','".$usuarioId."','".$aciertos."','".$fallos."','".$blancos."')";
     if(mysql_query($consultaResultados)){
         $_SESSION["idUnidad"] = $idUnidad;
         echo "<script>window.location.href='test.php'</script>";
@@ -83,7 +83,7 @@ if (isset($_POST["resultados"])){
                 $resultadoAlumnoExamen = mysql_query($consultaAlumnoExamen);
                 $cant = mysql_num_rows($resultadoAlumnoExamen);
                 if ($cant == 0){
-                    echo "<h2>Aún no has realizado ningún examen</h2>";
+                    echo "<h2 style='text-align:center;padding-top:25px;'>Aún no has realizado ningún examen</h2>";
                 }
                 else{
                     //Preguntar a jose el mínimo para aprobar
@@ -93,7 +93,7 @@ if (isset($_POST["resultados"])){
             
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $idCurso;?>">
-                <input type="submit" name="test" value="Empezar examen">
+                <input type="submit" name="test" class="btn btn-warning" style="text-aling:center;" value="Empezar examen">
             </form>
             
             <?php
@@ -175,7 +175,7 @@ if (isset($_POST["resultados"])){
             ?>
             <footer>
                 <article id="articleboton">
-                <a href="unidad.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
+                <a href="unidad.php?id=<?php echo $curso["id"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
                 <article id="articleubicacion">
                     <?php
