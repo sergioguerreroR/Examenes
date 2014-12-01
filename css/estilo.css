@@ -290,3 +290,13 @@ table{
     margin-left: 390px;
     margin-top: 10px;
 }
+
+#botonProgramados{
+    background-color: rgba(0, 0, 0, 0.4);
+    background: none;
+    font-weight: bold;
+    width: 80%;
+    outline:0px;
+    text-align: center;
+}
+

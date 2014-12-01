@@ -28,8 +28,8 @@ else{
                     <img id="caraImagen" src="imagenes/cabeceraCDP.png">
                 </div>
                 <div id="nombreUsuarioRegistrado">
-                   <?php echo $_SESSION["usuarioNombre"];?>
-                   <a href="index.php">Cerrar sesión</a>
+                    <p><?php echo $_SESSION["usuarioNombre"];?></p>
+                    <p><a href="index.php">Cerrar sesión</a></p>
                 </div>
             </header>
             <section id="sectionunidad">

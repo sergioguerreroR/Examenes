@@ -154,9 +154,7 @@ if (isset($_POST["resultados"])){
                 <?php
                     }
                                        echo '</tr>';
-                    
-                  
-
+                   
                 }
                 ?>
                         </tbody>
@@ -191,12 +189,12 @@ if (isset($_POST["resultados"])){
                 ?>
                             <div class="item<?php if($i <= 1){echo " active"; }?>">
                                 <div class="finlay-carousel-caption">
-                                    <h3><?php echo $i." - ".$preguntas['pregunta'];?></h3>
+                                    <center><h3 id="practicos"><?php echo $i." - ".$preguntas['pregunta'];?></h3></center>
                                     <input type="hidden" value="<?php echo $preguntas['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta1']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta3']; ?></button></p>
-                                    <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta4']; ?></button></p>
+                                    <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta1']; ?></button></p></center>
+                                    <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p></center>
+                                    <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta3']; ?></button></p></center>
+                                    <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta4']; ?></button></p></center>
                                     <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $preguntas['explicacion']; ?></p>
                                     <p>
                                         <?php 
@@ -211,7 +209,7 @@ if (isset($_POST["resultados"])){
                                             echo "</form>";
                                         }
                                         else{
-                                            echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>';
+                                            echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button id="resolver" class="btn btn-primary btn-default">Siguiente</button></a>';
                                         }
                                         ?>
                                     </p>
