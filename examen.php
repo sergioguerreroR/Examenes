@@ -71,6 +71,30 @@ if (isset($_POST["resultados"])){
                 <span class="headerUsuario"><p><?php echo $_SESSION["usuarioNombre"];?></p>
                     <p><a href="index.php">Cerrar sesión</a></p></span>
             </header>
+            <?php
+            //Se ejecutará este código si no estamos haciendo el examen
+            if(!isset($_POST["test"])){
+                $consultaAlumnoExamen = "SELECT * FROM examen WHERE id_alumno = '".$_SESSION["usuarioId"]."'";
+                $resultadoAlumnoExamen = mysql_query($consultaAlumnoExamen);
+                $cant = mysql_num_rows($resultadoAlumnoExamen);
+                if ($cant == 0){
+                    echo "<h2>Aún no has realizado ningún examen</h2>";
+                }
+                else{
+                    //Preguntar a jose el mínimo para aprobar
+                }
+            ?>
+            
+            
+            <form method="POST">
+                <input type="hidden" name="id" value="<?php echo $idCurso;?>">
+                <input type="submit" name="test" value="Empezar examen">
+            </form>
+            
+            <?php
+            }
+            else{
+            ?>
             <section id="sectiontest">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
                         
@@ -141,6 +165,9 @@ if (isset($_POST["resultados"])){
                         </div>
                     </div>
             </section>
+            <?php
+            }
+            ?>
             <footer>
                 <article id="articleboton">
                 <a href="unidad.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
