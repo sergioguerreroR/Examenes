@@ -37,7 +37,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
 </head>
 <body>
 	<main>
-                <header>
+                <header style="background-color:rgba(255, 255, 255, 0.5);border-radius: 70px;">
                 <div id="caraDali">
                     <img id="caraImagen" src="imagenes/cabeceraCDP.png">
                 </div>

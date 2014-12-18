@@ -29,16 +29,18 @@ $blancos = 0;
 
 //Recogida de resultados
 if (isset($_POST["resultados"])){
+    //Total de preguntas realizadas
+    $numTotalPreg = $_POST["numTotalPreg"];
     //Recogemos el String con los resultados
     $resultadosString = $_POST["resultados"];
     
     //Lo transformamos a array y buscamos los aciertos,fallos y blancos
     $resultados = explode(",", $resultadosString);
-    foreach ($resultados as $value){
-        if($value == "acierto"){
+    for ($i=1;$i<=$numTotalPreg;$i++){
+        if(isset($resultados[$i]) && $resultados[$i] == "acierto"){
             $aciertos++;
         }
-        elseif($value == "fallo"){
+        elseif(isset($resultados[$i]) && $resultados[$i] == "fallo"){
             $fallos++;
         }
         else{
@@ -75,7 +77,7 @@ if (isset($_POST["resultados"])){
 </head>
 <body>
 	<main>
-             <header>
+             <header style="background-color:rgba(255, 255, 255, 0.5);border-radius: 70px;">
                 <div id="caraDali">
                     <img id="caraImagen" src="imagenes/cabeceraCDP.png">
                 </div>
@@ -205,6 +207,7 @@ if (isset($_POST["resultados"])){
                                             echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
                                             echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
                                             echo "<input type='hidden' name='resultados' id='resultados'/>";
+                                            echo "<input type='hidden' name='numTotalPreg' value='$i'/>";
                                             echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
                                             echo "</form>";
                                         }

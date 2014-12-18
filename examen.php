@@ -23,12 +23,25 @@ $aciertos = 0;
 $fallos = 0;
 $blancos = 0;
 if (isset($_POST["resultados"])){
+    //Total de preguntas realizadas
+    $numTotalPreg = $_POST["numTotalPreg"];
     //Recogemos el String con los resultados
     $resultadosString = $_POST["resultados"];
     
     //Lo transformamos a array y buscamos los aciertos,fallos y blancos
     $resultados = explode(",", $resultadosString);
-    foreach ($resultados as $value){
+    for ($i=1;$i<=$numTotalPreg;$i++){
+        if(isset($resultados[$i]) && $resultados[$i] == "acierto"){
+            $aciertos++;
+        }
+        elseif(isset($resultados[$i]) && $resultados[$i] == "fallo"){
+            $fallos++;
+        }
+        else{
+            $blancos++;
+        }
+    }
+    /*foreach ($resultados as $value){
         if($value == "acierto"){
             $aciertos++;
         }
@@ -38,18 +51,14 @@ if (isset($_POST["resultados"])){
         else{
             $blancos++;
         }
-    }
+    }*/
     
     //Recogemos el resto de variables
-    $numero = $_POST["testNumero"];
     $usuarioId = $_SESSION["usuarioId"];
     
     
-    $consultaResultados = "INSERT into examen(id_curso,id_usuario,aciertos,fallos,blancos) VALUES('".$idCurso."','".$usuarioId."','".$aciertos."','".$fallos."','".$blancos."')";
-    if(mysql_query($consultaResultados)){
-        $_SESSION["idUnidad"] = $idUnidad;
-        echo "<script>window.location.href='test.php'</script>";
-    }
+    $consultaResultados = "INSERT INTO examen(id_curso,id_alumno,aciertos,fallos,blancos) VALUES('".$idCurso."','".$usuarioId."','".$aciertos."','".$fallos."','".$blancos."')";
+    mysql_query($consultaResultados);
 }
 
 ?>
@@ -79,14 +88,18 @@ if (isset($_POST["resultados"])){
             <?php
             //Se ejecutará este código si no estamos haciendo el examen
             if(!isset($_POST["test"])){
-                $consultaAlumnoExamen = "SELECT * FROM examen WHERE id_alumno = '".$_SESSION["usuarioId"]."'";
+                $consultaAlumnoExamen = "SELECT * FROM examen WHERE id_alumno = '".$_SESSION["usuarioId"]."' ORDER BY ID DESC LIMIT 1";
                 $resultadoAlumnoExamen = mysql_query($consultaAlumnoExamen);
                 $cant = mysql_num_rows($resultadoAlumnoExamen);
                 if ($cant == 0){
                     echo "<h2 style='text-align:center;padding-top:25px;'>Aún no has realizado ningún examen</h2>";
                 }
                 else{
-                    //Preguntar a jose el mínimo para aprobar
+                    echo "<h2 style='text-align:center;padding-top:25px;'>Examen Realizado</h2><br>";
+                    $examen = mysql_fetch_array($resultadoAlumnoExamen);
+                    echo "Aciertos: ".$examen["aciertos"]."<br />";
+                    echo "Fallos: ".$examen["fallos"]."<br />";
+                    echo "Blancos: ".$examen["blancos"]."";
                 }
             ?>
             
@@ -147,8 +160,9 @@ if (isset($_POST["resultados"])){
                                 //echo $preguntas["id"][0];
                                 if($i == 100){
                                     echo "<form method='POST'>";
-                                    echo "<input type='hidden' name='idCurso' value='$idCurso'/>";
+                                    echo "<input type='hidden' name='id' value='$idCurso'/>";
                                     echo "<input type='hidden' name='resultados' id='resultados'/>";
+                                    echo "<input type='hidden' name='numTotalPreg' value='$i'/>";
                                     echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
                                     echo "</form>";
                                 }
