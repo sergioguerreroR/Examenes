@@ -254,8 +254,7 @@ table{
 
 #caraDali{
     display: inline-block;
-            background-image: url('imagenes/cabeceraCDP.png');
-
+    background-image: url('imagenes/cabeceraCDP.png');
 }
 
 #caraImagen{
@@ -300,3 +299,13 @@ table{
     text-align: center;
 }
 
+.explicacionTest{
+    background-color: rgba(0, 179, 0, 0.3);
+    font-family: tahoma;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-family: tahoma;
+}

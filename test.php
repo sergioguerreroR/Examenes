@@ -154,7 +154,7 @@ if (isset($_POST["resultados"])){
                 <?php
                     }
                                        echo '</tr>';
-                   
+         
                 }
                 ?>
                         </tbody>
@@ -195,7 +195,7 @@ if (isset($_POST["resultados"])){
                                     <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta2']; ?></button></p></center>
                                     <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta3']; ?></button></p></center>
                                     <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $preguntas['respuesta4']; ?></button></p></center>
-                                    <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $preguntas['explicacion']; ?></p>
+                                    <p class="explicacionTest" id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $preguntas['explicacion']; ?></p>
                                     <p>
                                         <?php 
                                         
@@ -205,7 +205,7 @@ if (isset($_POST["resultados"])){
                                             echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
                                             echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
                                             echo "<input type='hidden' name='resultados' id='resultados'/>";
-                                            echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
+                                            echo "<center><button class='btn btn-primary btn-danger' type='submit' onclick='arrayResultados();'>Terminar</button></center>";
                                             echo "</form>";
                                         }
                                         else{

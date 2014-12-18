@@ -80,7 +80,7 @@ $unidad = mysql_fetch_array($resultadoUnidades);
                                             echo "<input type='hidden' name='idUnidad' value='$idUnidad'/>";
                                             echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
                                             echo "<input type='hidden' name='resultados' id='resultados'/>";
-                                            echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
+                                            echo "<button class='btn btn-primary btn-danger' type='submit' onclick='arrayResultados();'>Terminar</button>";
                                             echo "</form>";
                                         }
                                         else{
