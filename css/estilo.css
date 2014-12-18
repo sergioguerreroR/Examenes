@@ -246,6 +246,7 @@ table{
     float: right;
     *margin-right: 20px;
     *margin-top: 30px;
+    padding-top: 25px;
     font-size: 15px;
     font-family: comic sans ms;
     text-align: center;
@@ -263,7 +264,7 @@ table{
 }
 
 #practicos{
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(66, 138, 204, 0.4);
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
