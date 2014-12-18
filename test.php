@@ -77,7 +77,7 @@ if (isset($_POST["resultados"])){
 </head>
 <body>
 	<main>
-             <header style="background-color:rgba(255, 255, 255, 0.5);border-radius: 70px;">
+             <header id="cabecera">
                 <div id="caraDali">
                     <img id="caraImagen" src="imagenes/cabeceraCDP.png">
                 </div>
@@ -208,7 +208,7 @@ if (isset($_POST["resultados"])){
                                             echo "<input type='hidden' name='testNumero' value='$testNumero'/>";
                                             echo "<input type='hidden' name='resultados' id='resultados'/>";
                                             echo "<input type='hidden' name='numTotalPreg' value='$i'/>";
-                                            echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
+                                            echo "<center><button class='btn btn-primary btn-danger' type='submit' onclick='arrayResultados();'>Terminar</button></center>";
                                             echo "</form>";
                                         }
                                         else{
@@ -230,9 +230,15 @@ if (isset($_POST["resultados"])){
             }
             ?>
             <footer>
+                <?php
+                if(!isset($_POST["test"])){
+                ?>   
                 <article id="articleboton">
                 <a href="curso.php?id=<?php echo $unidad["id_cursos"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
+                <?php
+                }
+                ?>
                 <article id="articleubicacion">
                     <?php
                     echo '<span id="ubica">'.$unidad['nombre'].'</span>';

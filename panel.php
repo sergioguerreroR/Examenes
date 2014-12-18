@@ -14,7 +14,7 @@ include('conexion.php');
 </head>
 <body>
 	<main>
-            <header>
+            <header id="cabecera">
                 <div id="caraDali">
                     <img id="caraImagen" src="imagenes/cabeceraCDP.png">
                 </div>

@@ -76,7 +76,7 @@ if (isset($_POST["resultados"])){
 </head>
 <body>
 	<main>
-            <header>
+            <header id="cabecera">
                 <div id="caraDali">
                     <img id="caraImagen" src="imagenes/cabeceraCDP.png">
                 </div>
@@ -96,17 +96,36 @@ if (isset($_POST["resultados"])){
                 }
                 else{
                     echo "<h2 style='text-align:center;padding-top:25px;'>Examen Realizado</h2><br>";
+             ?>
+                    <article id="articleTest">
+                    <table id="tablatest" class="table table-condensed">
+                        <thead>
+                        <tr>
+                        <th>Aciertos</th>
+                        <th>Errores</th>
+                        <th>Blancos</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+            <?php
                     $examen = mysql_fetch_array($resultadoAlumnoExamen);
-                    echo "Aciertos: ".$examen["aciertos"]."<br />";
-                    echo "Fallos: ".$examen["fallos"]."<br />";
-                    echo "Blancos: ".$examen["blancos"]."";
+                    echo "<tr>";
+                    echo "<td>".$examen["aciertos"]."</td>";
+                    echo "<td>".$examen["fallos"]."</td>";
+                    echo "<td>".$examen["blancos"]."</td>";
+                    echo "</tr>";
+            ?>
+                        </tbody>
+                    </table>
+                    </article>       
+            <?php
                 }
             ?>
             
             
             <form method="POST">
                 <input type="hidden" name="id" value="<?php echo $idCurso;?>">
-                <input type="submit" name="test" class="btn btn-warning" style="text-aling:center;" value="Empezar examen">
+                <center><input type="submit" name="test" class="btn btn-warning" style="text-aling:center;" value="Empezar examen"></center>
             </form>
             
             <?php
@@ -147,12 +166,12 @@ if (isset($_POST["resultados"])){
                 ?>
                     <div class="item<?php if($i <= 1){echo " active"; }?>">
                         <div class="finlay-carousel-caption">
-                            <h3><?php echo $i." - ".$examen['pregunta'];?></h3>
+                            <center><h3 id="practicos"><?php echo $i." - ".$examen['pregunta'];?></h3></center>
                             <input type="hidden" value="<?php echo $examen['respuesta_correcta']; ?>" name="correcta" id="respuesta_correcta<?php echo $i;?>"/>
-                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta1']; ?></button></p>
-                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta2']; ?></button></p>
-                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta3']; ?></button></p>
-                            <p><button onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta4']; ?></button></p>
+                            <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta1" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta1']; ?></button></p></center>
+                            <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta2" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta2']; ?></button></p></center>
+                            <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta3" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta3']; ?></button></p></center>
+                            <center><p><button id="botonProgramados" onclick="valida(this.value,<?php echo $i;?>);" value="respuesta4" class="pregunta<?php echo $i;?>"><?php echo $examen['respuesta4']; ?></button></p></center>
                             <p id="explicacion<?php echo $i;?>" style="display: none;"><?php echo $examen['explicacion']; ?></p>
                             <p>
                                 <?php 
@@ -163,11 +182,11 @@ if (isset($_POST["resultados"])){
                                     echo "<input type='hidden' name='id' value='$idCurso'/>";
                                     echo "<input type='hidden' name='resultados' id='resultados'/>";
                                     echo "<input type='hidden' name='numTotalPreg' value='$i'/>";
-                                    echo "<button type='submit' onclick='arrayResultados();'>Terminar</button>";
+                                    echo "<center><button class='btn btn-primary btn-danger' type='submit' onclick='arrayResultados();'>Terminar</button></center>";
                                     echo "</form>";
                                 }
                                 else{
-                                    echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button>Siguiente</button></a>';
+                                    echo '<a href="#carousel-example-generic" role="button" data-slide="next"><button id="resolver" class="btn btn-primary btn-default">Siguiente</button></a>';
                                 }
                                 ?>
                             </p>
@@ -188,9 +207,15 @@ if (isset($_POST["resultados"])){
             }
             ?>
             <footer>
+                <?php
+                if(!isset($_POST["test"])){
+                ?>
                 <article id="articleboton">
                 <a href="unidad.php?id=<?php echo $curso["id"]; ?>"><img src="imagenes/anterior.png" /></a>
                 </article>
+                <?php
+                }
+                ?>
                 <article id="articleubicacion">
                     <?php
                     echo '<span id="ubica">'.$curso['nombre'].'</span>';
